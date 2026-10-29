@@ -1,0 +1,67 @@
+name: watch
+
+# Sprawdza terminy co ~90 s: job startuje co 15 min i pracuje 14 min.
+# Konfiguracja (zawartość config.toml) leży w zmiennej repozytorium TERMINATOR_CONFIG,
+# token i chat id w sekretach TELEGRAM_TOKEN / TELEGRAM_CHAT_ID. Bez TERMINATOR_CONFIG job jest pomijany.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Nigdy dwie pętle naraz; kolejny run czeka, aż poprzedni skończy.
+concurrency:
+  group: watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    if: ${{ vars.TERMINATOR_CONFIG != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install .
+
+      - name: Write config
+        env:
+          TERMINATOR_CONFIG: ${{ vars.TERMINATOR_CONFIG }}
+        run: printf '%s\n' "$TERMINATOR_CONFIG" > config.toml
+
+      # Zapamiętane terminy trzymamy w osobnej gałęzi `state`.
+      - name: Load state
+        run: |
+          if git fetch --depth=1 origin state; then
+            git worktree add --detach .state FETCH_HEAD
+          else
+            git worktree add --detach .state HEAD
+            git -C .state checkout -q --orphan state
+            git -C .state rm -rfq .
+          fi
+
+      - name: Watch
+        timeout-minutes: 16
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: terminator-nfz run --minutes 14 --state .state/state.json
+
+      - name: Save state
+        if: always()
+        working-directory: .state
+        run: |
+          [ -f state.json ] || exit 0
+          git add state.json
+          if git diff --cached --quiet; then echo "Stan bez zmian"; exit 0; fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "state: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push origin HEAD:refs/heads/state

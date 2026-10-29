@@ -1,0 +1,17 @@
+# Usługa systemd (użytkownika) uruchamiająca Terminator NFZ bez końca.
+# Instalacja: patrz README, sekcja „Na stałe: systemd”.
+[Unit]
+Description=Terminator NFZ – powiadomienia o wolnych terminach
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Katalog z config.toml i .env (zmień, jeśli sklonowałeś repo gdzie indziej).
+WorkingDirectory=%h/terminator-nfz
+ExecStart=%h/terminator-nfz/.venv/bin/terminator-nfz run
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=default.target

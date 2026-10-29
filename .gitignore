@@ -1,0 +1,17 @@
+# osobiste ustawienia i sekrety
+.env
+config.toml
+state.json
+logs/
+
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# narzędzia
+.playwright-mcp/
+.state/

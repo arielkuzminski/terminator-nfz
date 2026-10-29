@@ -1,0 +1,19 @@
+# Konfiguracja Terminatora NFZ. Skopiuj ten plik jako config.toml i uzupełnij.
+
+# Adres strony przychodni na lekarzebezkolejki.pl (skopiuj z paska przeglądarki).
+clinic_url = "https://lekarzebezkolejki.pl/placowka/NazwaPrzychodni.Miasto"
+
+# Numery (id) lekarzy do pilnowania. Listę z numerami pokaże polecenie:
+#   terminator-nfz doctors
+# Pusta lista = wszyscy lekarze placówki (z uwzględnieniem `specialties`).
+doctors = [1234567, 2345678]
+
+# Opcjonalnie: tylko wybrane poradnie/specjalności (numer widoczny w `terminator-nfz doctors`,
+# np. 3081 = POZ / lekarz rodzinny). Pusta lista = wszystkie.
+specialties = []
+
+# Jakie wizyty zgłaszać: "nfz", "prywatna" albo obie.
+visit_types = ["nfz"]
+
+# Co ile sekund sprawdzać (minimum 30). Bądź łaskawy dla serwera – 90 s w zupełności wystarcza.
+interval_seconds = 90

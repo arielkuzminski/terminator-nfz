@@ -1,0 +1,1799 @@
+<!DOCTYPE HTML SYSTEM "about:legacy-compat">
+<html lang="pl"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta content="IE=Edge" http-equiv="X-UA-Compatible"/><title>POLMED SP&Oacute;ŁKA AKCYJNA  - LekarzeBezKolejki.pl</title><meta content="POLMED SP&Oacute;ŁKA AKCYJNA - Lubicz 23A, 31-503 Krak&oacute;w. Zarezerwuj wizytę na&nbsp;NFZ lub prywatnie." name="description"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,700,700italic&subset=latin,latin-ext&display=swap"/><script defer="defer" async="async" src="https://www.google.com/recaptcha/api.js?hl=pl"></script><script src="https://cdn.osoz.pl/common/ext/jquery/3.6.0/jquery-3.6.0.min.js"></script><script src="https://cdn.osoz.pl/common/ext/jquery-ui/1.13.2/jquery-ui.min.js"></script><script src="https://cdn.osoz.pl/common/ext/jquery-ui/1.13.2/jquery-ui.structure.css"></script><script src="https://cdn.osoz.pl/common/ext/jquery-ui/1.13.2/jquery-ui.theme.css"></script><script src="https://cdn.osoz.pl/common/ext/jquery.form-4.2.2.min.js"></script><script src="https://cdn.osoz.pl/common/ext/jquery.cookie.min.js"></script><script src="https://cdn.osoz.pl/common/ext/jquery.onscreenResize-1.12.1.min.js"></script><script src="https://cdn.osoz.pl/lbk/javascript/common/globalInflection.min.js"></script><script src="https://cdn.osoz.pl/lbk/javascript/common/animatescroll.min.js"></script><link media="screen" href="https://cdn.osoz.pl/common/ext/jquery-ui/1.13.2/jquery-ui.min.css" type="text/css" rel="stylesheet"/><link media="screen" href="https://cdn.osoz.pl/lbk/themes/lekarzebezkolejki/1.4.15/styles.min.css" rel="stylesheet"/><link media="screen" href="https://cdn.osoz.pl/lbk/themes/fonts/lbk/1.1.0/icons.min.css" rel="stylesheet"/><script src="https://cdn.osoz.pl/lbk/javascript/jquery/i18n/jquery.ui.datepicker-pl.min.js"></script><link href="/images/lekarzebezkolejki.ico" rel="Shortcut Icon"/><script src="https://cdn.osoz.pl/common/ext/jquery.blockUI.min.js"></script><script src="https://cdn.osoz.pl/common/ext/loadingoverlay-2.1.6.min.js"></script><script>
+    var gaUAActive = true;
+    var ga4Active = true;
+    
+    function gaHit(kategoria, akcja, etykieta, wartosc, pozostaleParametry) {
+      if (gaUAActive && typeof(ga) == "function") {
+        async(function() {
+          ga('send', 'event', kategoria, akcja, etykieta, wartosc, pozostaleParametry);
+        });
+      }
+
+      if (ga4Active && typeof(gtag) == "function") {
+        async(function() {
+          gtag('event', kategoria, {
+            event_action: akcja,
+            event_label: etykieta,
+            value: wartosc
+          });
+        });
+      }
+    }
+    function gaHiddenHit(kategoria, akcja, etykieta, wartosc) {
+      async(function() {
+        gaHit(kategoria, akcja, etykieta, wartosc, {
+          nonInteraction: true
+        });
+      });
+    }
+    function gaHitWithCallback(kategoria, akcja, etykieta, callback) {
+      if (gaUAActive && typeof (ga) == "function") {
+        async(function() {
+          ga('send', {
+            hitType: 'event',
+            eventCategory: kategoria,
+            eventAction: akcja,
+            eventLabel: etykieta,
+            hitCallback: function() {
+              if (typeof (callback) == "function") {
+                // Callback teraz wywoływany przez GA4
+                // callback();
+              }
+            }
+          });
+        });
+      }
+      
+      if (ga4Active && typeof(gtag) == "function") {
+        async(function() {
+          gtag('event', kategoria, {
+            event_action: akcja,
+            event_label: etykieta,
+            event_callback: function () {
+              if (typeof (callback) == "function") {
+                callback();
+              }
+            }
+          });
+        });
+      }
+    }
+    function async(func, callback) {
+      setTimeout(function() {
+        func();
+        if (callback) {
+          callback();
+        }
+      }, 0);
+    }
+    function wlaczZaslonke() {
+      $.blockUI({ message: '', overlayCSS:  {opacity:0.2}, baseZ: 2000 });
+    }
+    
+    function wylaczZaslonke() {
+      $.unblockUI();
+    }
+    </script><script src="https://cdn.osoz.pl/lbk/javascript/types/SortType.min.js"></script><script src="https://cdn.osoz.pl/lbk/javascript/types/RefType.min.js"></script><script>
+     //
+       var SidebarChat = function(){};
+       SidebarChat.onChatWidth = 465;
+       
+       SidebarChat.showChat = function () {
+         if ($('.sidebar:last') && (
+             $('.sidebar-chat').length + 
+             $('.sidebar-call-center').length + 
+             $('.sidebar-qanda').length) != 0) {
+           if (!$('.sidebar:last').is(':visible')) {
+             $('.sidebar:last').show();
+           }
+           $('.sidebar-chat').show();
+         } 
+       };
+       
+     // </script><script>
+	function showDescription(idPomocnicze) {
+		var tabsName = $('div[id^=tabs-]:visible').attr('id');
+    var select = '';
+    if (tabsName != undefined) {
+      select = '#' + tabsName + ' ';
+    } 
+    $(select + "#opisTel_" + idPomocnicze).toggle();
+	}
+	
+	function showDescriptionvAndRemoveButton(idPomocnicze, e) {
+		var tabsName = $('div[id^=tabs-]:visible').attr('id');
+    var select = '';
+    if (tabsName != undefined) {
+      select = '#' + tabsName + ' ';
+    } 
+    $(select + "#opisTel_" + idPomocnicze).show();
+    e.remove();
+	}
+</script></head><body><script>
+  var appUrlPart ='';
+  var urlTab = window.location.href.split("/");
+  if (urlTab.length >=4 && urlTab[3] == 'lbk-www') {
+    appUrlPart = 'lbk-www/';
+  }
+
+  var widthForWindowTest = $( window ).width();
+  var heightForWindowTest = $( window ).height();
+  
+  $(document).ready(function (){
+    var widthForWindow = $( window ).width();
+    console.log("Window " + widthForWindow);
+    if (widthForWindow < 600 && widthForWindow > 400 ) {
+      if ($("#bannerLekarzeBezKolejki").length) {
+        $("#bannerLekarzeBezKolejki").css('min-height', '155px');
+      }
+    } else if (widthForWindow < 1000 &&  widthForWindow > 600) {
+      if ($("#bannerLekarzeBezKolejki").length) {
+        $("#bannerLekarzeBezKolejki").css('min-height', '150px');
+      }
+    } else if (widthForWindow > 1000 ) {
+      if ($("#bannerLekarzeBezKolejki").length) {
+        $("#bannerLekarzeBezKolejki").css('min-height', '110px');
+      }
+    }
+  });
+  </script><div id="skipLinks"><a href="#pageMain">Przejdź do&nbsp;gł&oacute;wnej treści</a></div><div class="page-top"></div><div class="body"><div class="page"><header class="page-header"><div class="header-strap"><div class="content"><figure class="logo fl:l"><a href="https://lekarzebezkolejki.pl/"><img alt="Logo portalu" srcset="https://cdn.osoz.pl/lbk/themes/images/logo-lbk-po_white.svg" src="https://cdn.osoz.pl/lbk/themes/images/logo-lbk-po_white.png" class="des:u"/><img alt="Logo portalu" srcset="https://cdn.osoz.pl/lbk/themes/images/logo-lbk-po_white_m.svg" src="https://cdn.osoz.pl/lbk/themes/images/logo-lbk-po_white_m.png" class="tab:m"/></a></figure><div class="fl:r"><p style="line-height:20px;" class="tab:m m:0 m-t:xs f-s:xxs t-a:c">Znajdź wolny termin <br class="tab:m">spośród <b class="liczbaTerminowNaRok" style="">wielu</b><br/>dostępnych na najbliższy rok</p><p style="line-height:28px;" class="des:u m:0 m-t:xs f-s:xl t-a:c">Znajdź wolny termin <br class="tab:m">spośród <b class="liczbaTerminowNaRok" style="">wielu</b><br/>dostępnych na najbliższy rok</p></div></div></div></header><script src="https://cdn.osoz.pl/common/int/CookiesManager.js"></script><div data-keyboard="false" data-backdrop="static" style="display: none;" id="cookies" class="cookies"><section class="cookies-info" id="cookies-info"><div class="cookies-wrapper"><div class="cookies-content"><div class="cookies-scrolled"><h1 class="m:0">Twoja prywatność jest dla nas ważna</h1><p>Nasz serwis wykorzystuje mechanizmy między innymi takie jak cookies (ciasteczka), Web Storage i inne,
+              które służą m.in. do zapewnienia optymalnej obsługi podczas wizyty w naszym serwisie. Powyższe mechanizmy
+              mogą być wykorzystywane przez nas, jak i przez naszych partnerów. Część z nich jest niezbędna do
+              prawidłowego działania serwisu, w tym zapewnienia niezbędnego poziomu bezpieczeństwa, pozostałe (które
+              możesz kontrolować) są wykorzystywane do:</p><ul><li>obsługi dodatkowych funkcjonalności usprawniających działanie naszego serwisu,</li><li>analizy tego, w jaki sposób korzystasz z naszej strony,</li><li>marketingu bezpośredniego i wyświetlania reklam, w tym reklam spersonalizowanych,</li><li>udostępniania funkcji mediów społecznościowych.</li></ul><p><b>Kliknij „Akceptuję i przechodzę do serwisu”, aby wyrazić zgodę na przetwarzanie przez nas i naszych
+              partnerów Twoich danych w powyższych celach.</b></p><p>Pamiętaj, że wyrażenie zgody jest dobrowolne, a wyrażoną zgodę możesz w każdej chwili cofnąć, możesz też
+              wycofać zgodę na przetwarzanie Twoich danych tylko w niektórych celach. Jeżeli chcesz dowiedzieć się
+              więcej lub chcesz przeprowadzić konfigurację szczegółową, to możesz tego dokonać za pomocą „Ustawień
+              zaawansowanych”.</p><p>Więcej informacji na temat wykorzystywania narzędzi zewnętrznych w naszym serwisie znajdziesz w
+              Regulaminie Serwisu.</p></div></div><div class="cookies-buttons"><div><button class="b:pri f-w:b" id="btnCookiesAll" type="button">Akceptuję i przechodzę do serwisu</button></div><div><a class="m-r:l" id="btnCookiesOptions" href="#">Ustawienia zaawansowane</a></div></div></div></section><section class="cookies-options" id="cookies-options"><div class="cookies-wrapper"><div class="cookies-content"><div class="cookies-scrolled"><h2 class="m:0 m-b:s">Ustawienia zaawansowane</h2><p>Przetwarzamy informacje pozyskane przy wykorzystaniu technologii cookies, Web Storage i innych wyłącznie
+              w celach wymienionych poniżej. Część z tych informacji jest niezbędna dla działania naszego serwisu, w
+              pozostałym zakresie możesz skonfigurować swoje preferencje w zakresie poszczególnych celów, poprzez
+              zaznaczenie stosownej zgody przy każdym z nich. Możesz też wyrazić zgodę na wszystkie cele poprzez
+              wybranie klawisza „Akceptuję wszystko i przechodzę do serwisu”.</p><hr class="dotted"/><div><div class="flex"><h3 aria-hidden="true" class="f-w:b flex-g">Niezbędne</h3><p class="c:green f-w:b t-t:u">Zawsze aktywne</p></div><p class="f-s:s">Mechanizmy o charakterze niezbędnym są wymagane do prawidłowego działania naszego
+                serwisu. Bez nich część przygotowanych dla Ciebie funkcjonalności nie będzie działać poprawnie lub nie
+                będzie działać wcale. Te mechanizmy są konieczne do funkcjonowania naszego serwisu, dlatego są zawsze
+                aktywne (nie możesz ich wyłączyć).</p></div><hr class="dotted"/><div class="m-b"><div class="field-toggle compact field-inline"><h3 aria-hidden="true" class="f-w:b flex-g">Funkcjonalne</h3><label><input type="checkbox" id="cookiesFunctional" name="functional"/><span class="tgg-c"><span id="cookies2Label" class="tgg-f">Zgadzam się na ciasteczka funkcjonalne</span><span aria-hidden="true" class="tgg-s"><span class="tgg-n">Nie</span><span class="tgg-y">Tak</span></span></span><span aria-hidden="true" class="tgg-desc"><span class="tgg-n">Nieaktywne</span><span class="tgg-y">Aktywne</span></span></label></div><p class="f-s:s">Mechanizmy funkcjonalne są wykorzystywane przez dodatkowe funkcjonalności serwisu.
+                Możesz z nich zrezygnować, ale w takim przypadku skorzystanie z części funkcjonalności serwisu
+                będzie utrudnione lub wręcz niemożliwe. Informacje zawarte w przedmiotowych mechanizmach mogą być
+                przetwarzane także przez naszych partnerów (Facebook, Disquas, Youtube, Whitepress). Więcej informacji
+                o wykorzystywanych przez nas narzędziach zewnętrznych znajdziesz w naszej Polityce Prywatności
+                wskazanej w Regulaminie naszego Serwisu.</p></div><hr class="dotted"/><div class="m-b"><div class="field-toggle compact field-inline"><h3 aria-hidden="true" class="f-w:b flex-g">Analityczne i statystyczne</h3><label><input type="checkbox" id="cookiesAnalyticsAndStatistics" name="analyticsAndStatistics"/><span class="tgg-c"><span id="cookies3Label" class="tgg-f">Zgadzam się na ciasteczka analityczne i statystyczne</span><span aria-hidden="true" class="tgg-s"><span class="tgg-n">Nie</span><span class="tgg-y">Tak</span></span></span><span aria-hidden="true" class="tgg-desc"><span class="tgg-n">Nieaktywne</span><span class="tgg-y">Aktywne</span></span></label></div><p class="f-s:s">Mechanizmy analityczne pomagają nam zrozumieć w jaki sposób użytkownicy poruszają się po
+                naszym serwisie, a także które strony serwisu cieszą się największą popularnością. Dzięki tym
+                mechanizmom jesteśmy w stanie lepiej przygotowywać nowe funkcjonalności naszego serwisu oraz
+                optymalizować działanie już istniejących. Informacje zawarte w przedmiotowych mechanizmach mogą być
+                przetwarzane także przez naszych partnerów (Google LLC). Więcej informacji o wykorzystywanych przez nas
+                narzędziach zewnętrznych znajdziesz w naszej Polityce Prywatności wskazanej w Regulaminie naszego
+                Serwisu.</p></div><hr class="dotted"/><div class="m-b"><h3 aria-hidden="true" class="f-w:b flex-g">Reklamowe</h3><p>Mechanizmy reklamowe są wykorzystywane przez nas oraz naszych partnerów do budowania kontentu
+                reklamowego w naszym serwisie – lista partnerów może ulegać zmianie, jej aktualną wersję zawsze
+                znajdziesz w tym miejscu. Więcej informacji o wykorzystywanych przez nas narzędziach zewnętrznych
+                znajdziesz w naszej Polityce Prywatności wskazanej w Regulaminie naszego Serwisu.
+              </p><p>Nasi partnerzy: </p><ul><li><button data-slider="dostawcy-google" class="link switcher" type="button">
+                    Google
+                  </button><div style="display: none;" id="dostawcy-google" class="slider"><a href="https://www.google.com/policies/technologies/partner-sites/" rel="nofollow" target="_blank">Polityka prywatności</a></div></li><li><button data-slider="dostawcy" class="link switcher" type="button">
+                    Sieć marketingowa Google
+                  </button><div style="display: none;" id="dostawcy" class="slider"><ul><li>Aarki - <a href="http://corp.aarki.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Adara Media - <a href="https://adara.com/2018/04/10/adara-gdpr-faq/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Adform - <a href="https://site.adform.com/uncategorized/product-and-services-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Adikteev - <a href="https://www.adikteev.com/eu/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Adludio - <a href="https://www.adludio.com/terms-conditions/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>AdMaxim - <a href="http://www.admaxim.com/admaxim-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Akamai - <a href="http://www.akamai.com/compliance/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Amazon - <a href="https://www.amazon.co.uk/gp/help/customer/display.html?nodeId=201909010" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Amobee - <a href="https://www.amobee.com/trust/privacy-guidelines" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Arrivalist - <a href="https://www.arrivalist.com/privacy#gdpr" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Avocet - <a href="http://avocet.io/privacy-portal" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Bannerflow - <a href="https://www.bannerflow.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Booking.com - <a href="https://www.booking.com/content/privacy.en-gb.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Centro - <a href="http://privacy.centro.net/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Cint - <a href="https://www.cint.com/participant-privacy-notice/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Clinch - <a href="https://clinch.co/pages/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Cloud Technologies - <a href="http://green.erne.co/assets/PolicyCT.pdf" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Crimtan - <a href="https://crimtan.com/privacy-ctl/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Criteo - <a href="https://www.criteo.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>DataXu - <a href="https://docs.roku.com/published/userprivacypolicy/en/gb" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Delta Projects - <a href="http://www.deltaprojects.com/data-collection-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Demandbase - <a href="https://www.demandbase.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>DENTSU - <a href="http://www.dentsu.co.jp/terms/data_policy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Dstillery - <a href="https://dstillery.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>eBay - <a href="https://www.ebay.com/help/policies/member-behaviour-policies/user-privacy-notice-privacy-policy?id=4260#section12" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>emetriq - <a href="https://www.emetriq.com/datenschutz/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Exponential - <a href="http://exponential.com/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Facebook - <a href="https://www.facebook.com/about/privacy/update" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Fractional Media - <a href="https://www.fractionalmedia.com/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>FUSIO BY S4M - <a href="http://www.s4m.io/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Gemius - <a href="https://www.gemius.com/cookie-policy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>GroupM - <a href="https://www.groupm.com/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Impact - <a href="https://impact.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Index Exchange - <a href="http://www.indexexchange.com/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Infectious Media - <a href="https://impressiondesk.com/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>intelliAd - <a href="https://www.intelliad.de/datenschutz" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>IPONWEB - <a href="http://www.bidswitch.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>LifeStreet - <a href="http://www.lifestreet.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Liftoff - <a href="https://liftoff.io/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>LiveRamp - <a href="https://liveramp.com/service-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Localsensor - <a href="https://www.localsensor.com/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>LoopMe - <a href="https://loopme.com/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Lotame - <a href="https://www.lotame.com/about-lotame/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>MainADV - <a href="http://www.mainad.com/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Manage.com - <a href="https://www.manage.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Marketing Science Consulting Group, Inc. - <a href="http://mktsci.com/privacy_policy.htm" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>MediaMath - <a href="http://www.mediamath.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Mobitrans - <a href="http://www.mobitrans.net/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Mobpro - <a href="http://mobpro.com/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Moloco Ads - <a href="http://www.molocoads.com/private-policy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>MSI-ACI - <a href="http://site.msi-aci.com/Home/FlexTrackPrivacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Nano Interactive - <a href="http://www.nanointeractive.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>NEORY GmbH - <a href="https://www.neory.com/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Netflix - <a href="http://www.netflix.com/google-3PAS-info" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Neustar - <a href="https://www.home.neustar/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Omnicom Media Group - <a href="https://www.omnicommediagroup.com/disclaimer.htm" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Optomaton - <a href="http://optomaton.com/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>OTTO - <a href="https://www.otto.de/shoppages/service/datenschutz" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>PERMODO - <a href="http://permodo.com/de/privacy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Publicis Media - <a href="https://www.publicismedia.de/datenschutz/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>PubMatic - <a href="https://pubmatic.com/legal/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>PulsePoint - <a href="https://www.pulsepoint.com/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Quantcast - <a href="https://www.quantcast.com/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Rakuten Marketing - <a href="https://rakutenadvertising.com/legal-notices/services-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Remerge - <a href="http://remerge.io/privacy-policy.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Resolution Media - <a href="https://www.nonstoppartner.net" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Resonate - <a href="https://www.resonate.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>RevJet - <a href="https://www.revjet.com/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Roq.ad - <a href="https://www.roq.ad/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>RTB House - <a href="https://www.rtbhouse.com/privacy-center/services-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Rubicon Project - <a href="https://rubiconproject.com/rubicon-project-advertising-technology-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Sift Media - <a href="https://www.sift.co/privacy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Simpli.fi - <a href="https://simpli.fi/simpli-fi-services-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Sizmek - <a href="https://www.sizmek.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Smaato - <a href="https://www.smaato.com/privacy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Smadex - <a href="http://smadex.com/end-user-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Smart - <a href="http://smartadserver.com/company/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Smartology - <a href="https://www.smartology.net/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Sociomantic - <a href="https://www.sociomantic.com/privacy/en/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Sojern - <a href="https://www.sojern.com/privacy/product-privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Sovrn - <a href="https://www.sovrn.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Spotad - <a href="http://www.spotad.co/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>SpotX - <a href="https://www.spotx.tv/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>TabMo - <a href="http://static.tabmo.io.s3.amazonaws.com/privacy-policy/index.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>The Trade Desk - <a href="https://www.thetradedesk.com/general/privacy-policy" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Tradedoubler AB - <a href="http://www.tradedoubler.com/en/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>TreSensa - <a href="http://tresensa.com/eu-privacy/index.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>TruEffect - <a href="https://trueffect.com/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Verizon Media - <a href="https://www.verizonmedia.com/policies/ie/en/verizonmedia/privacy/index.html" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Videology - <a href="https://videologygroup.com/en/privacy-policy/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Weborama - <a href="https://weborama.com/en/weborama-privacy-commitment/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Widespace - <a href="https://www.widespace.com/legal/privacy-policy-notice/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Amnet Nordics w/DBM - <a href="https://www.amnetgroup.com/en/uk/privacy-notice/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Value Media (PL) w/ DBM - <a href="https://valuemedia.pl/" rel="nofollow" target="_blank">Polityka prywatności</a></li><li>Aegis Media Network w/ Invite Media (Europe) - <a href="https://www.dentsu.com/pl/pl/polityki/globalne-zasady-ochrony-prywatnosci" rel="nofollow" target="_blank">Polityka prywatności</a></li></ul></div></li></ul><div class="field-toggle compact field-inline"><h4 class="f-w:b flex-g" aria-hidden="true">Reklamowe niespersonalizowane</h4><label><input type="checkbox" id="cookiesNonpersonalized" name="nonpersonalized"/><span class="tgg-c"><span id="cookies4Label" class="tgg-f">Zgadzam się na ciasteczka reklamowe niespersonalizowane</span><span aria-hidden="true" class="tgg-s"><span class="tgg-n">Nie</span><span class="tgg-y">Tak</span></span></span><span aria-hidden="true" class="tgg-desc"><span class="tgg-n">Nieaktywne</span><span class="tgg-y">Aktywne</span></span></label></div><p class="f-s:s">Mechanizmy wykorzystywane są do wyświetlenia reklamy na podstawie wyłącznie aktualnych
+                informacji kontekstowych – np. zawartości otwartej strony, aktualnie wyszukiwanego hasła, przybliżonej
+                lokalizacji (np. na poziomie miasta).</p><div class="field-toggle compact field-inline"><h4 class="f-w:b flex-g" aria-hidden="true">Reklamowe spersonalizowane</h4><label><input type="checkbox" id="cookiesPersonalized" name="personalized"/><span class="tgg-c"><span id="cookies4Label" class="tgg-f">Zgadzam się na ciasteczka reklamowe spersonalizowane</span><span aria-hidden="true" class="tgg-s"><span class="tgg-n">Nie</span><span class="tgg-y">Tak</span></span></span><span aria-hidden="true" class="tgg-desc"><span class="tgg-n">Nieaktywne</span><span class="tgg-y">Aktywne</span></span></label></div><p class="f-s:s">Reklamy spersonalizowane to reklamy dopasowane do potrzeb użytkowników. Mechanizmy
+                wykorzystywane są do wyświetlenia reklamy na podstawie danych dotyczących wcześniejszych zachowań
+                użytkownika, np. wyszukiwanych haseł, lokalizacji lub wizyt na stronach internetowych lub w
+                aplikacjach. Zaznaczenie tej opcji pozwoli nam i naszym partnerom na dostarczenie treści lepiej
+                dostosowanej do Twojej osoby. Jeśli zablokujesz te mechanizmy, reklamy skierowane do Ciebie będą gorzej
+                dopasowane.</p></div><hr class="dotted"/><div class="t-a:c m-b:l m-t:l"><a id="btnCookiesSelected" href="#">Zapisz moje ustawienia i przejdź do serwisu</a></div></div></div><div class="cookies-buttons"><div><button class="b:pri f-w:b" id="btnCookiesAll2" type="button">Akceptuję wszystko i przechodzę do serwisu</button></div><div><button class="b:brd b:s" id="btnCookiesBack" type="button">Powrót do informacji</button></div></div></div></section></div><script>
+      function reloadPage(action) {
+        if (['ACC_ALL', 'ACC_SEL_ALL', 'ACC_SEL'].includes(action)) {
+          window.location.reload();
+        }
+      }
+      var cm;
+      $(function() {
+          cm = new CookiesManager({ version: '2', acceptAllFirstId: '#btnCookiesAll', acceptAllSecondId: '#btnCookiesAll2',
+              acceptSelectedId: '#btnCookiesSelected', formId: '#cookies-options',
+              infoId: '#cookies-info', showFormId: '#btnCookiesOptions', showInfoId: '#btnCookiesBack',
+              popupId: '#cookies', actionCallback: reloadPage, secure: "https:" == document.location.protocol });
+          cm.init();
+      });
+  </script><script>
+      function startAnimatedCounter(max) {
+        $('.liczbaTerminowNaRok').each(function () {
+          var $this = $(this);
+          jQuery({ Counter: 0 }).animate({ Counter: max }, {
+            duration: 3000,
+            easing: 'easeOutExpo',
+            step: function () {
+              $this.text(Math.ceil(this.Counter).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+            }
+          });
+        });
+      }
+      var ileTerm = $.cookie("lbk_wolne_terminy");
+      if (ileTerm != null) {
+        $('.liczbaTerminowNaRok').text(ileTerm.replace(/\B(?=(\d{3})+(?!\d))/g, " "));
+      } else {
+        $.ajax({
+          url: '/lekarzebezkolejki/pobierzLiczbeWolnychTerminow',
+          type: 'post',
+          success: function(response) {
+            if (response != null) {
+              $.cookie("lbk_wolne_terminy", response, { path: '/', secure: "https:" == document.location.protocol });
+              startAnimatedCounter(response);
+            }
+          }
+        });
+      }
+      </script><div class="page-wrapper"><div class="page-main-wrapper"><div class="page-main"><div id="pageMain" role="main" class="main-content"><section class="page-content popup-menu"><div class="content"><div class="popup-menu-container" id="menuStrap"><div class="logged-out"><p class="f-w:b">Zaloguj się lub zał&oacute;ż konto</p><div class="box t-a:c"><a id="log-in" class="b:pri" rel="nofollow" href="/lbk-www/zaloguj?josso_back=/polmed-spolka-akcyjna-krakow">Zaloguj się</a><a class="b:sec" rel="nofollow" href="https://www.osoz.pl/osoz-www/aktywacja/zasady?zakladanieKonta=true"><span class="f-s:m">Zał&oacute;ż konto</span></a></div></div><hr class="dotted"><div><a href="/blog/zdrowie/y-1205">Poradniki o&nbsp;zdrowiu</a><a href="/kontakt">Kontakt</a><a href="/placowki">Plac&oacute;wki medyczne w&nbsp;Polsce</a><a href="/specjalizacje-lekarskie">Specjalizacje lekarskie</a><a target="_blank" href="https://ktomalek.pl/l/lek/szukaj">Informacje o&nbsp;lekach</a><a href="/misja">Misja</a></div></hr></div></div></section><section class="page-content-wide crumbs-strap"><div class="content"><nav id="navOkruszki" class="nav nav-crumbs"><div class="row-start"><ul class="nav-cat"><li class="nav-item"><a class="nav-cat-title bgr-c:blue c:white" href="/informacje-dla-lekarza"><span>Dla Lekarza</span></a></li></ul></div><div class="row-end"><ul class="nav-cat"><li class="nav-item"><button onclick="handleBtnClick(event)" data-false="Pokaż" data-true="Ukryj" data-desc="menu użytkownika" aria-pressed="false" aria-label="Pokaż menu" data-slider="menuStrap" class="nav-cat-title switcher" type="button"><i class="icon-12 icon-user"></i><span> Logowanie </span></button></li></ul></div></nav></div></section><script>
+   function handleBtnClick(event) {
+     toggleButton(event.target);
+   }
+   function toggleButton(element) {
+     var pressed = (element.getAttribute("aria-pressed") === "true");
+	 element.setAttribute("aria-pressed", !pressed);
+   }
+ </script><script src="https://cdn.osoz.pl/common/ext/galleria-1.6.1.min.js"></script><script src="https://cdn.osoz.pl/lbk/javascript/galleria/galleria-1.6.1/themes/classic/galleria.classic.min.js"></script><link rel="stylesheet" href="https://cdn.osoz.pl/lbk/javascript/galleria/galleria-1.6.1/themes/classic/galleria.classic.min.css"/><script>
+  var zaladowaniLekarze = false;
+  var zaladowaneGabinety = false;
+  var zaladowaneTerminy = false;
+  var wczytanaGaleria = false;
+  </script>
+  <script type='application/ld+json'>[{"@context":"http://schema.org","@type":"MedicalClinic","name":"POLMED SPÓŁKA AKCYJNA ","image":"https://lekarzebezkolejki.pl/resources/themes/images/poradnia0.jpg","address":{"@type":"PostalAddress","streetAddress":"Lubicz  23A","postalCode":"31-503","addressLocality":"Kraków "},"department":[]},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"position":"1","@type":"ListItem","item":{"name":"Lekarze bez kolejki","@id":"https://lekarzebezkolejki.pl"}},{"position":"2","@type":"ListItem","item":{"name":"polmed-spolka-akcyjna-krakow","@id":"https://lekarzebezkolejki.pl/placowkaMedyczna/wizytowka/1112494"}}]}]</script>
+  <script src="https://cdn.osoz.pl/common/ext/jquery.ajaxq.min.js"></script><div style="display: none" id="gifLoaderTerminy"><img alt="Wczytywanie" src="https://cdn.osoz.pl/lbk/themes/images/loader.gif" id="loader_terminy"/></div><script>
+    kolejka_terminow_licznik = 0;
+    kolejka_uslug_licznik = 0;
+    kolejka_kafli_licznik = 0;
+    
+    pierwszyTermin = true;
+
+  $(function() {
+    var $opt = $('#filterSkierowanieWizytowka option:selected');
+    window.lbkSkierowanieType = ($opt.data('val') || 'REF_BRAK');
+  });
+
+  function ladujKafleWizytowki(idZasobu, idSwiadczeniodawcy, idKafla,
+                              typZasobu, idSwiadczeniodawcyRZOZ, nrJednostki,
+                              idSpecjalnosciRZOZ, czyGrupowanie, czyRejestracjaBezKarty,
+                              idPlatnika, typWidoku, dataOd, dataDo,
+                              search, idLokalizacji, wspDlugosc, wspSzerokosc,
+                              backLink, pokazDemo, rejestracjaUrlTerminarz,
+                              linkZasobu, linkLokalizacji, linkSpecjalnosci, czyLBK, indeksObiektu, telefon,
+                              czyZamawianieReceptDlaZasobu, czyIntegracjaLBK) {
+      var idEl = "_"+idZasobu+"_"+idSwiadczeniodawcyRZOZ+"_"+idSpecjalnosciRZOZ;
+      if (czyLBK != 'true') {
+          $("div#loaderDiv"+idEl).prepend($('#loader_terminy').clone());
+          $("div#loaderDivUslugi"+idEl).prepend($('#loader_terminy').clone());
+      }
+      var data = {
+                idZasobu                : idZasobu,
+                idSwiadczeniodawcy      : idSwiadczeniodawcy,
+                idKafla                 : idKafla,
+                typZasobu               : typZasobu,
+                idSwiadczeniodawcyRZOZ  : idSwiadczeniodawcyRZOZ,
+                idSpecjalnosciRZOZ      : idSpecjalnosciRZOZ,
+                nrJednostki             : nrJednostki,
+                czyGrupowanie           : (czyGrupowanie == 'T'),
+                czyRejestracjaBezKarty  : (czyRejestracjaBezKarty == 'true'),
+                typWidoku               : typWidoku,
+                backLink                : backLink,
+                rejestracjaUrlTerminarz : rejestracjaUrlTerminarz,
+                linkZasobu              : linkZasobu,
+                linkLokalizacji         : linkLokalizacji,
+                linkSpecjalnosci        : linkSpecjalnosci,
+                czyIntegracjaLBK        : (czyIntegracjaLBK == 'true'),
+                skierowanieType         : (window.lbkSkierowanieType || 'REF_BRAK')
+            };
+        if (dataOd) {
+          data.dataOd = dataOd;
+        }
+        if (dataDo) {
+          data.dataDo = dataDo;
+        }
+        if (idPlatnika) {
+          data.idPlatnika = idPlatnika;
+        }
+        if (search) {
+          data.searchInput = search;
+        }
+        if (idLokalizacji) {
+          data.idLokalizacji = idLokalizacji;
+        }
+        if (wspDlugosc) {
+          data.wspDlugosc = wspDlugosc;
+        }
+        if (wspSzerokosc) {
+          data.wspSzerokosc = wspSzerokosc;
+        }
+        if (backLink) {
+          data.backLink = backLink;
+        }
+        if (pokazDemo) {
+          data.pokazDemo = pokazDemo;
+        }
+        if (indeksObiektu) {
+          data.indeksObiektu = indeksObiektu;
+        }
+        if (telefon) {
+          data.telefon = telefon;
+        }
+        if(czyZamawianieReceptDlaZasobu) {
+          data.czyZamawianieReceptDlaZasobu = czyZamawianieReceptDlaZasobu;
+        }
+        var attr = $(idKafla).attr('data-czyPobranoKafla');
+        if (attr == 'false') {
+          kolejka_kafli_licznik++;
+          jQuery.ajaxq('kolejka_kafli_wizytowki', {
+            url: "/placowkaMedyczna/pobierzKafelWizytowkiAjax",
+            dataType: "html",
+            data: data,
+            cache: false,
+            success: function(data) {
+              kolejka_kafli_licznik--;
+              $(idKafla).attr('data-czyPobranoKafla', 'true');
+              if (czyLBK == 'true') {
+                $(idKafla).find("section[id='sekcjaKafla']").html( data );
+              } else {
+                $("div#loaderDiv"+idEl).remove();
+                $(idKafla).find("div[id*='terminy_']").html( $(data).filter("div[id='terminy']").children("*") );
+                $(idKafla).find("div[id*='uslugi_']").html( $(data).filter("div[id='uslugi']").children("*") );
+              }
+              if (kolejka_kafli_licznik <=1) {
+                $("select[id='lekarze_filtr_usluga']").prop('disabled', false);
+                $("select[id='lekarze_filtr_platnik']").prop('disabled', false);
+              }
+            },
+              error: function(xhr, ajaxOptions, thrownError ) {
+                kolejka_kafli_licznik--;
+                if (xhr.statusText === 'abort') {
+                    // nie rób nic
+                  } else {
+                    ladujGdyBlad(idEl, typWidoku);
+                }
+              }
+          });	
+        }
+    }
+    
+    
+    
+    
+    function ladujGdyBlad (idEl, typWidoku) {
+      $('div#terminy'+idEl).find('#loader_terminy').remove();
+      if ('WIZ' == typWidoku) {
+        $('div#loaderDiv'+idEl).removeClass('m-t');
+        $('div#loaderDiv'+idEl).html('<p class="t-a:c m-t:xxl m-b:xxl">Nie pobrano termin&oacute;w</p>');
+      } else if ('WYSZ' == typWidoku) {
+        $('div#terminy'+idEl).prepend('<p class="t-a:c m-t:xxl m-b:xxl">Nie pobrano termin&oacute;w</p>');
+      }
+    }
+    
+    function ladujUslugiAjax (idZasobu, idSwiadczeniodawcy, idSwiadczeniodawcyRZOZ, idSpecjalnosciRZOZ, typWidoku) {
+      var idEl = "_"+idZasobu+"_"+idSwiadczeniodawcyRZOZ+"_"+idSpecjalnosciRZOZ;
+
+      var data = {
+          idZasobu                : idZasobu,
+          idSwiadczeniodawcy      : idSwiadczeniodawcy,
+          idSwiadczeniodawcyRZOZ  : idSwiadczeniodawcyRZOZ,
+          idSpecjalnosciRZOZ      : idSpecjalnosciRZOZ
+      };
+      
+      // usługi płatne
+      kolejka_uslug_licznik++;
+      jQuery.ajaxq('kolejka_uslug_platnych', {
+        url: "/lekarze/pobierzUslugiPlatneZasobuAjax",
+        dataType: "html",
+        data: data,
+        cache: false,
+        success: function(data) {
+          if (data.indexOf("Wybrana strona nie istnieje") < 0) {
+            $("div#uslugi"+idEl).html( data );
+          }
+          kolejka_uslug_licznik--;
+          if ('LBK-WYSZ' == typWidoku && kolejka_uslug_licznik <= 1) {
+            pobieranieUslugZakonczone();
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError ) {
+          kolejka_uslug_licznik--;
+          if ('LBK-WYSZ' == typWidoku && kolejka_uslug_licznik <= 1) {
+            pobieranieUslugZakonczone();
+          }
+        }
+      });
+    }
+    
+    function ladujTerminyAjax (idZasobu, typZasobu, idSwiadczeniodawcy, idSwiadczeniodawcyRZOZ, nrJednostki,
+        idSpecjalnosciRZOZ, czyGrupowanie, czyRejestracjaBezKarty, idPlatnika, typWidoku, dataOd, dataDo,
+        search, idLokalizacji, wspDlugosc, wspSzerokosc, backLink, pokazDemo, rejestracjaUrlTerminarz,
+        linkZasobu, linkLokalizacji, linkSpecjalnosci, czyZamawianieReceptDlaZasobu) {
+      var idEl = "_"+idZasobu+"_"+idSwiadczeniodawcyRZOZ+"_"+idSpecjalnosciRZOZ;
+      // loader
+      if (typZasobu == 'P') {
+        idEl = "_KOL_"+idSwiadczeniodawcyRZOZ+"_"+idSpecjalnosciRZOZ;
+        if ('WYSZ' == typWidoku) {
+          $("div#terminy"+idEl).prepend($('#loader_terminy').clone());
+        }
+      } else if ('WYSZ' == typWidoku) {
+        $("div#terminy"+idEl).prepend($('#loader_terminy').clone());
+      } else if ('WIZ' == typWidoku || typWidoku == null) {
+        $("div#loaderDiv"+idEl).prepend($('#loader_terminy').clone());
+        $("div#loaderDivUslugi"+idEl).prepend($('#loader_terminy').clone());
+      }
+            
+      var data = {
+        idZasobu                : idZasobu,
+        typZasobu               : typZasobu,
+        idSwiadczeniodawcy      : idSwiadczeniodawcy,
+        idSwiadczeniodawcyRZOZ  : idSwiadczeniodawcyRZOZ,
+        idSpecjalnosciRZOZ      : idSpecjalnosciRZOZ,
+        nrJednostki             : nrJednostki,
+        czyGrupowanie           : (czyGrupowanie == 'T'),
+        czyRejestracjaBezKarty  : (czyRejestracjaBezKarty == 'true'),
+        typWidoku               : typWidoku,
+        backLink                : backLink,
+        rejestracjaUrlTerminarz : rejestracjaUrlTerminarz,
+        linkZasobu              : linkZasobu,
+        linkLokalizacji         : linkLokalizacji,
+        linkSpecjalnosci        : linkSpecjalnosci
+      };
+      
+      if (dataOd) {
+        data.dataOd = dataOd;
+      }
+      if (dataDo) {
+        data.dataDo = dataDo;
+      }
+      if (idPlatnika) {
+        data.idPlatnika = idPlatnika;
+      }
+      if (search) {
+        data.searchInput = search;
+      }
+      if (idLokalizacji) {
+        data.idLokalizacji = idLokalizacji;
+      }
+      if (wspDlugosc) {
+        data.wspDlugosc = wspDlugosc;
+      }
+      if (wspSzerokosc) {
+        data.wspSzerokosc = wspSzerokosc;
+      }
+      if (backLink) {
+        data.backLink = backLink;
+      }
+      if (pokazDemo) {
+        data.pokazDemo = pokazDemo;
+      }
+      if (czyZamawianieReceptDlaZasobu) {
+        data.czyZamawianieReceptDlaZasobu = czyZamawianieReceptDlaZasobu;
+      }
+      if($('#blozy').val()) {
+        data.blozy = $('#blozy').val();
+      }
+      
+      if (typZasobu == 'L' || typZasobu == 'U') {
+        // terminy
+        kolejka_terminow_licznik++;
+        jQuery.ajaxq('kolejka_terminow', {
+            url: "/placowkaMedyczna/pobierzTerminyDniaAjax",
+            dataType: "html",
+            data: data,
+            cache: false,
+            success: function(data) {
+              if (data.indexOf("Wybrana strona nie istnieje") < 0) {
+                if ('LBK-WIZ' == typWidoku || 'LBK-WYSZ' == typWidoku || 'LBK' == typWidoku) {
+                  $("div#terminy"+idEl).html( data );
+                } else if ('WYSZ' == typWidoku) {
+                  $('div#terminy'+idEl).find('#loader_terminy').remove();
+                  $("div#terminy"+idEl).html( data );
+                } else if ('WIZ' == typWidoku || typWidoku == null){
+                  $("div#loaderDiv"+idEl).remove();
+                  $("div#terminy"+idEl).html( data );
+                }
+              } else {
+                ladujGdyBlad(idEl, typWidoku);
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError ) {
+              if (xhr.statusText === 'abort') {
+                // nie rób nic
+              } else {
+                ladujGdyBlad(idEl, typWidoku);
+              }
+            }
+        });
+        
+        // usługi płatne
+        jQuery.ajaxq('kolejka_uslug_platnych', {
+          url: "/lekarze/pobierzUslugiPlatneZasobuAjax",
+          dataType: "html",
+          data: data,
+          cache: false,
+          success: function(data) {
+            if (data.indexOf("Wybrana strona nie istnieje") < 0) {
+              $("div#uslugi"+idEl).html( data );
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError ) {
+            if (xhr.statusText === 'abort') {
+              // nie rób nic
+            }
+          }
+        });
+      } else if (typZasobu == 'P') {
+        jQuery.ajaxq('kolejka_terminow_poradni', {
+            url: "/placowkaMedyczna/pobierzTerminyDniaAjax",
+            dataType: "html",
+            data: data,
+            cache: false,
+            success: function(data) {
+              if (data.indexOf("Wybrana strona nie istnieje") < 0) {
+                if ('LBK' == typWidoku) {
+                  $("div#terminy"+idEl).html( data );
+                } else if ('WYSZ' == typWidoku) {
+                  $('div#terminy'+idEl).find('#loader_terminy').remove();
+                  $("div#terminy"+idEl).html( data );
+                } else if ('WIZ' == typWidoku || typWidoku == null){
+                  $("div#loaderDiv"+idEl).remove();
+                  $("div#terminy"+idEl).html( data );
+                }
+              } else {
+                ladujGdyBlad(idEl, typWidoku);
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError ) {
+              if (xhr.statusText === 'abort') {
+                // nie rób nic
+              } else {
+                ladujGdyBlad(idEl, typWidoku);
+              }
+            }
+        });
+      }
+    }
+    
+    function stopKolejkiPobieraniaTerminow() {
+      jQuery.ajaxq('kolejka_terminow', {});
+    }
+  </script><div class="page-content"><div class="content"><section class="metryka" id="page"><form method="post" action="/lekarzebezkolejki/znajdz" id="formHeaderZnajdz"><div id="lokalizacja" class="metryka-half"><div class="metryka-field"><label aria-label="zmień miasto" for="searchMiasto"><span>zmień</span><span class="v-h">miasto</span></label><div><input value="Kraków, małopolskie " id="searchMiasto" type="text"/></div></div></div><div id="specjalizacja" class="metryka-half metryka-field"><label aria-label="zmień specjalizację" for="searchLekarz"><span>zmień</span><span class="v-h">specjalizację</span></label><div><input autocomplete="off" type="text" value="wszystkie specjalności" id="searchLekarz"/></div></div><input value="krakow" name="linkMiasto" id="linkMiasto" type="hidden"/><input value="lekarz" name="linkSpecjalnosc" id="linkSpecjalnosc" type="hidden"/><input name="lng" id="lng" type="hidden"/><input name="lat" id="lat" type="hidden"/><input value="" name="str" id="str" type="hidden"/><input value="" name="sort" id="sort" type="hidden"/><input value="" name="skier" id="skier" type="hidden"/><input value="" name="odleglosc" id="odleglosc" type="hidden"/></form><section class="metryka-section"><h1>
+                  <a href="/polmed-spolka-akcyjna-krakow">POLMED SPÓŁKA AKCYJNA  </a><br class="tab:m"/>
+                </h1><div class="d:i f-s:m">&nbsp;Lubicz 23A</div><a aria-label="zmień plac&oacute;wkę" href="#0" onclick="sprawdzCzyUzupelnionePola();" class="metryka-change"><span>zmień</span></a></section></section><script src="https://cdn.osoz.pl/lbk/javascript/lbk/obslugaAutocompleterowWyszukiwania-1.1.0.min.js"></script><script>
+
+  $(document).ready(function() {
+    $("#kontenerTMobile option[data-val=10]").attr('selected','selected');
+    wypelnioneMiasto = false;
+    wypelnionaSpecjalnosc = false;
+    var parametryInicjalizacji = {
+        miastaGlowne                : $.parseJSON('[{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Bydgoszcz","idMiejscowosci":107927,"idPowiatu":461,"linkSkrotu":"bydgoszcz","miastoCapitalize":"Bydgoszcz","miastoCapitalizeDzielnica":"Bydgoszcz","nazwa":"Bydgoszcz","nazwaDopelniacz":null,"nazwaMiejscownik":"Bydgoszczy","powiat":"powiat m. bydgoszcz","teryt":461011,"wojewodztwo":"kujawsko-pomorskie","wspDlugosc":18.0002529,"wspSzerokosc":53.1219648},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Gdańsk","idMiejscowosci":170996,"idPowiatu":2261,"linkSkrotu":"gdansk","miastoCapitalize":"Gdańsk","miastoCapitalizeDzielnica":"Gdańsk","nazwa":"Gdańsk","nazwaDopelniacz":null,"nazwaMiejscownik":"Gdańsku","powiat":"powiat m. gdańsk","teryt":2261011,"wojewodztwo":"pomorskie","wspDlugosc":18.6452029,"wspSzerokosc":54.347628},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Katowice","idMiejscowosci":175780,"idPowiatu":2469,"linkSkrotu":"katowice","miastoCapitalize":"Katowice","miastoCapitalizeDzielnica":"Katowice","nazwa":"Katowice","nazwaDopelniacz":null,"nazwaMiejscownik":"Katowicach","powiat":"powiat m. katowice","teryt":2469011,"wojewodztwo":"śląskie","wspDlugosc":19.0215852,"wspSzerokosc":50.2598987},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Kraków","idMiejscowosci":139820,"idPowiatu":1261,"linkSkrotu":"krakow","miastoCapitalize":"Kraków","miastoCapitalizeDzielnica":"Kraków","nazwa":"Kraków","nazwaDopelniacz":null,"nazwaMiejscownik":"Krakowie","powiat":"powiat m. kraków","teryt":1261011,"wojewodztwo":"małopolskie","wspDlugosc":19.941708,"wspSzerokosc":50.06051},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Lublin","idMiejscowosci":115348,"idPowiatu":663,"linkSkrotu":"lublin","miastoCapitalize":"Lublin","miastoCapitalizeDzielnica":"Lublin","nazwa":"Lublin","nazwaDopelniacz":null,"nazwaMiejscownik":"Lublinie","powiat":"powiat m. lublin","teryt":663011,"wojewodztwo":"lubelskie","wspDlugosc":22.5701022,"wspSzerokosc":51.250559},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Łódź","idMiejscowosci":125419,"idPowiatu":1061,"linkSkrotu":"lodz","miastoCapitalize":"Łódź","miastoCapitalizeDzielnica":"Łódź","nazwa":"Łódź","nazwaDopelniacz":null,"nazwaMiejscownik":"Łodzi","powiat":"powiat m. łódź","teryt":1061011,"wojewodztwo":"łódzkie","wspDlugosc":19.4569817,"wspSzerokosc":51.768749},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Poznań","idMiejscowosci":194715,"idPowiatu":3064,"linkSkrotu":"poznan","miastoCapitalize":"Poznań","miastoCapitalizeDzielnica":"Poznań","nazwa":"Poznań","nazwaDopelniacz":null,"nazwaMiejscownik":"Poznaniu","powiat":"powiat m. poznań","teryt":3064011,"wojewodztwo":"wielkopolskie","wspDlugosc":16.925036,"wspSzerokosc":52.406199},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Szczecin","idMiejscowosci":198330,"idPowiatu":3262,"linkSkrotu":"szczecin","miastoCapitalize":"Szczecin","miastoCapitalizeDzielnica":"Szczecin","nazwa":"Szczecin","nazwaDopelniacz":null,"nazwaMiejscownik":"Szczecinie","powiat":"powiat m. szczecin","teryt":3262011,"wojewodztwo":"zachodniopomorskie","wspDlugosc":14.542222,"wspSzerokosc":53.438056},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Warszawa","idMiejscowosci":150526,"idPowiatu":1465,"linkSkrotu":"warszawa","miastoCapitalize":"Warszawa","miastoCapitalizeDzielnica":"Warszawa","nazwa":"Warszawa","nazwaDopelniacz":null,"nazwaMiejscownik":"Warszawie","powiat":"powiat m.st. warszawa","teryt":1465011,"wojewodztwo":"mazowieckie","wspDlugosc":21.014229,"wspSzerokosc":52.232694},{"dataAktualizacjiWspolrzednych":null,"dzielnica":null,"gmina":"Wrocław","idMiejscowosci":103297,"idPowiatu":264,"linkSkrotu":"wroclaw","miastoCapitalize":"Wrocław","miastoCapitalizeDzielnica":"Wrocław","nazwa":"Wrocław","nazwaDopelniacz":null,"nazwaMiejscownik":"Wrocławiu","powiat":"powiat m. wrocław","teryt":264011,"wojewodztwo":"dolnośląskie","wspDlugosc":17.0326689,"wspSzerokosc":51.1089776}]'),
+        specjalnosciGlowne          : $.parseJSON('[{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"chirurg-ogolny","miejscowosc":null,"nazw":"chirurg ogólny","nazwaMianownikMnoga":"chirurdzy ogólni","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Chirurg Ogólny ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"dentysta-stomatolog","miejscowosc":null,"nazw":"dentysta stomatolog","nazwaMianownikMnoga":"dentyści stomatolodzy","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Dentysta Stomatolog ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"ginekolog","miejscowosc":null,"nazw":"ginekolog","nazwaMianownikMnoga":"ginekolodzy","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Ginekolog ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"kardiolog","miejscowosc":null,"nazw":"kardiolog","nazwaMianownikMnoga":"kardiolodzy","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Kardiolog ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"laryngolog","miejscowosc":null,"nazw":"laryngolog","nazwaMianownikMnoga":"laryngolodzy","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Laryngolog ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"lekarz-chorob-wewnetrznych","miejscowosc":null,"nazw":"lekarz chorób wewnętrznych","nazwaMianownikMnoga":"lekarze chorób wewnętrznych","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Lekarz Chorób Wewnętrznych ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"lekarz-rodzinny","miejscowosc":null,"nazw":"lekarz rodzinny","nazwaMianownikMnoga":"lekarze rodzinni","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Lekarz Rodzinny ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"okulista","miejscowosc":null,"nazw":"okulista","nazwaMianownikMnoga":"okuliści","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Okulista ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"ortopeda","miejscowosc":null,"nazw":"ortopeda","nazwaMianownikMnoga":"ortopedzi","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Ortopeda ","opis":null,"ulica":null,"wyszukanyZasob":"S"},{"idJednostki":null,"idZasobu":null,"imie":null,"imieCapitalize":null,"linkPlacowki":null,"linkSkrotu":"pediatra","miejscowosc":null,"nazw":"pediatra","nazwaMianownikMnoga":"pediatrzy","nazwaSwiadczeniodawcy":null,"nazwiskoCapitalize":"Pediatra ","opis":null,"ulica":null,"wyszukanyZasob":"S"}]'),
+        urlSzukajMiastaAjaxJson     : '/lekarzebezkolejki/znajdzMiastaAjaxJson',
+        urlSzukajLekOrazSpecAjax    : '/lekarzebezkolejki/znajdzLekarzaOrazSpecjalizacjeAjax',
+        autocomplete_nie_znaleziono : 'Nie znaleziono żadnych podpowiedzi.',
+        autocomplete_znaleziono     : 'Znaleziono ',
+        autocomplete_podpowiedzi    : 'podpowiedzi',
+        autocomplete_podpowiedz     : 'podpowiedź',
+        autocomplete_instrukcja     : ', użyj klawiszy strzałek w górę i w dół do nawigacji.',
+        autocomplete_do_lekarza     : 'Przejdź do lekarza: ',
+        autocomplete_do_placowki    : 'Przejdź do placówki:',
+        czyIntegracjaLBK            : '',
+        gornaSzukajka               : false
+    };
+    zainicjujObslugePolWyszukiwania(parametryInicjalizacji);
+  });
+function sprawdzCzyUzupelnionePola() {
+  if ('lekarz' == 'lekarz') {
+    $("#searchLekarz").trigger("click");
+  } else {
+    window.location.href = '/wszystkie specjalności/krakow';
+  }
+}
+
+$('#linkMiasto, #linkSpecjalnosc').on('linkValueChange',function() {
+  wyszukajZmianaNaglowka();
+});
+
+
+function wyszukajZmianaNaglowka() {
+  // Wyszukaj zmiany naglowka
+  var lok = $('#linkMiasto').val();
+  var miasto = $('#searchMiasto').val();
+  var spec = $('#linkSpecjalnosc').val();
+  var lekarz = $('#searchLekarz').val();
+  var odleglosc = $("#kontenerTMobile").find(':selected').attr('data-val');
+  var sortowanie = "";
+  var urlTab = window.location.href.split("/");
+  
+  if (lok == null || lok == '') {
+    $('#searchMiasto').focus().select();
+  } else if (spec != null && spec != '') {
+    if (spec == 'lekarz') {
+      $("#zmienLekarz").siblings("input").show().focus().select();
+    } else {
+      if ($('option:selected',this).attr('data-val') != '25') {
+        window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + (('false' === 'true' || 'LEKARZEBEZKOLEJKI' === 'DEFAULT' || 'false' === 'true') ? appUrlPart : "") + spec + '/' + lok
+                + ((odleglosc != null && odleglosc != '' && odleglosc != -1) ? ('/' + odleglosc + 'km') : '');
+      } else {
+        window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + (('false' === 'true' || 'LEKARZEBEZKOLEJKI' === 'DEFAULT' || 'false' === 'true') ? appUrlPart : "") + spec + '/' + lok;
+      }
+    }
+  } else {
+    $('#searchLekarz').focus().select();
+  }
+}
+$("#kontenerTMobile").on("change", function() {
+  if($('#linkSpecjalnosc').val() != 'lekarz') {
+    $('#odleglosc').val($('option:selected', this).attr("data-val"));
+    var urlTab = window.location.href.split("/");
+    if ($('option:selected',this).attr('data-val') != '25') {
+      window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + (('false' === 'true' || 'LEKARZEBEZKOLEJKI' === 'DEFAULT' || 'false' === 'true') ? appUrlPart : "") + 
+              $('#linkSpecjalnosc').val() + '/' + $('#linkMiasto').val() +
+      '?odleglosc=' + $('option:selected', this).attr('data-val') + 'km' + (($('#sort').val() !== '' || $('#sort').val() !== undefined) ? '&sort=' + $('#sort').val() : 'SORT');
+    } else {
+      window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + (('false' === 'true' || 'LEKARZEBEZKOLEJKI' === 'DEFAULT' || 'false' === 'true') ? appUrlPart : "") + 
+              $('#linkSpecjalnosc').val() + '/' + $('#linkMiasto').val();
+    }
+  }
+});
+$('#zmianaLokalizacji').on('change', function() {
+  var urlTab = window.location.href.split("/");
+  if (urlTab[3] === '') {
+    window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + $('#zmianaLokalizacji').val();
+  } else {
+    window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + urlTab[3] + '/' + $('#zmianaLokalizacji').val();
+  }
+});
+$('#zmianaLokalizacjiMobile').on('change', function() {
+  var urlTab = window.location.href.split("/");
+  if (urlTab[3] === '') {
+    window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + $('#zmianaLokalizacjiMobile').val();
+  } else {
+    window.location.href = urlTab[0] + '//' + urlTab[2] + '/' + urlTab[3] + '/' + $('#zmianaLokalizacjiMobile').val();
+  }
+});
+
+
+  $('#searchMiasto').on('focus', function () {
+  var miasto = $('#searchMiasto').val().replace(/,.*/, '');
+  $('#searchMiasto').val(miasto);
+})
+
+</script><div style="display:none;" title="Plac&oacute;wka wymaga rejestracji telefonicznej" id="terminTelefonPopup" class="popup"><p><span id="opisDoRejPopup">Aby umówić się na wizytę, należy skontaktować się z przychodnią telefonicznie.</span><b><a data-rel="external" href="tel:"><var id="telDoRejPopup"></var></a></b></p></div><script>
+  function pokazOknoRejestracjiTelefonicznej(telefon) {
+    let rejTelDialogOpis = 'Aby umówić się na wizytę, należy skontaktować się z przychodnią telefonicznie, pod numerem telefonu:';
+    let rejTelDialogOpisBezTelefonu = 'Aby umówić się na wizytę, należy skontaktować się z przychodnią telefonicznie.';
+    $('#terminTelefonPopup').dialog({
+      autoOpen: true,
+      width: 600,
+      height: 'auto',
+      modal: true,
+      resizable: false
+     });
+    if (telefon != null && telefon.length > 0) {
+      $('#opisDoRejPopup').text(rejTelDialogOpis + " ");
+      $('#telDoRejPopup').html(telefon);
+    } else {
+      $('#opisDoRejPopup').text(rejTelDialogOpisBezTelefonu);
+    }
+  }
+  
+  function wyslijInformacje(){
+    var idZasobu1 = '';
+    var idSwiadczeniodawcyRZOZ = '1112494';
+    
+    $.ajax({
+      type : 'GET',
+      url : '/lekarze/wyslijInfo',
+      data : {idZasobu: idZasobu, 
+              idSwiadczeniodawcyRZOZ: idSwiadczeniodawcyRZOZ},
+      timeout : 100000,
+      success : function(data) {
+        return true;
+      },
+      error : function(e) {
+        return false;
+      }
+    });
+  }
+  
+  function wyslijInformacjeIds(idZasobu,idSwiadczeniodawcyRZOZ){
+    
+    $.ajax({
+      type : 'GET',
+      url : '/lekarze/wyslijInfo',
+      data : {idZasobu: idZasobu, 
+              idSwiadczeniodawcyRZOZ: idSwiadczeniodawcyRZOZ},
+      timeout : 100000,
+      success : function(data) {
+        return true;
+      },
+      error : function(e) {
+        return false;
+      }
+    });
+  }
+  </script></div></div><div id="pageMain" class="page-content"><div class="content"><div id="wizytowkaPlacowki" class="tabs m-t:xl"><div class="flex flex-r a-i:c"><ul><li id="wizytowkaPoradnieSelector"><a href="#wizytowkaPoradnie"><span class="phablet-max">Poradnie</span><span class="tablet-up">Um&oacute;w się do&nbsp;poradni</span></a></li><li id="wizytowkaInformacjeSelector"><a href="#wizytowkaInformacje"><span>O&nbsp;plac&oacute;wce</span></a></li></ul></div><section style="display: none;" id="wizytowkaInformacje"><section id="wizytowkaInformacje"><div class="grid"><div class="mg-12 tg-8 dg-8"><div class="placowka-info"><h3>Informacje podstawowe</h3><div class="p-icon w-100"><i class="icon-16 icon-pin-thin c:green"></i><span class="pha:m"><a href="geo:?q=Kraków%20Lubicz%20
+    23A">Lubicz 23A,
+    31-503 Kraków</a></span><span class="tab:u">&nbsp;Lubicz 23A,
+    31-503 Kraków</span></div><div class="p-icon w-100"><i class="icon-16 icon-earth-thin c:green"></i><a rel="nofollow" target="_blank" href="http://www.polmed.pl">&nbspwww.polmed.pl</a></div></div></div><div class="mg-12 tg-4 dg-4"><hr class="phablet-max"/><div><h3>Lokalizacja</h3><div id="mapa"><div style="height:230px" id="basicMap"></div><link property="stylesheet" href="https://cdn.osoz.pl/lbk/javascript/mapy/theme/default/style.min.css" type="text/css" rel="stylesheet"/><script src="https://cdn.osoz.pl/lbk/javascript/mapy/OpenLayers.min.js"></script><script>
+    var iloscZakladek = 4;
+    
+    var map, fromProjection, toProjection, humanLayer, selektor;
+    var yellowPharmacyLayer = new Array();
+    var greenPharmacyLayer = new Array();
+    var grayPharmacyLayer = new Array();
+    var mapaNswdApteka=new Object();
+    
+    function uruchomMape(dlugoscGeo, szerokoscGeo, hidePopups,hideHumanLayer,disableZoomWheel) {
+      usunMape();
+      inicjujMape();
+      inicjujWarstwy();
+      ustawWarstwy();
+      dodajStart(dlugoscGeo, szerokoscGeo);
+      if (!hidePopups) {
+        dodajSelektory();
+      }
+      if(!!hideHumanLayer){
+        ukryjWarstwe(humanLayer);
+      }
+      if (disableZoomWheel) {
+        controls = map.getControlsByClass('OpenLayers.Control.Navigation');
+        
+        for(var i = 0; i < controls.length; ++i) {
+          controls[i].disableZoomWheel();
+        }
+      }
+    }
+    
+    function usunMape() {
+      if (map != undefined) {
+        map.destroy();
+      }
+    }
+    
+    function inicjujWarstwy() {
+      humanLayer = new OpenLayers.Layer.Vector("Overlay");
+      for (var x = 1; x <= iloscZakladek; x++) {
+        yellowPharmacyLayer['tabs-'+x] = new OpenLayers.Layer.Vector("Overlay");
+        greenPharmacyLayer['tabs-'+x] = new OpenLayers.Layer.Vector("Overlay");
+        grayPharmacyLayer['tabs-'+x] = new OpenLayers.Layer.Vector("Overlay");
+      }
+    }
+    
+    function inicjujMape() {
+      ustawSzerokoscMapy();
+      map = new OpenLayers.Map("basicMap");
+      var options = {
+        zoomOffset: 5,
+        resolutions: [4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 
+                      152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 
+                      4.777314267158508, 2.388657133579254, 1.194328566789627]
+      };
+      var layer = new OpenLayers.Layer.OSM("Mapy", 'https://osm.osoz.pl/osm_tiles/\$\{z\}/\$\{x\}/\$\{y\}.png', options);
+      map.addLayer(layer);
+      fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+      toProjection   = map.getProjectionObject(); // to Spherical Mercator Projection
+      console.log(layer.resolutions);
+    }
+    
+    function ustawWymiaryMapy() {
+      ustawSzerokoscMapy();
+      ustawWysokoscMapy();
+    }
+    
+    function ustawWymiaryMapyMobile() {
+      ustawSzerokoscMapyMobile();
+      ustawWysokoscMapy();
+    }
+    
+    function ustawWysokoscMapy() {
+      var height = $('.location-map-wrapper').height();
+      $("#basicMap").css('height', height);
+    }
+    
+    function ustawSzerokoscMapy() {
+      var width = $('#containerTresc').width();
+      $("#basicMap").css('width', width);
+    }
+    
+    function ustawSzerokoscMapyMobile() {
+      var width = $('.location-map-wrapper').width();
+      $("#basicMap").css('width', width);
+    }
+    
+    function ustawWarstwy() {
+      for (var x = 1; x <= iloscZakladek; x++) {
+        map.addLayer(grayPharmacyLayer['tabs-'+x]);
+        map.addLayer(greenPharmacyLayer['tabs-'+x]);
+        map.addLayer(yellowPharmacyLayer['tabs-'+x]);
+        map.setLayerIndex(grayPharmacyLayer['tabs-'+x], map.layers.length-4);
+        map.setLayerIndex(yellowPharmacyLayer['tabs-'+x], map.layers.length-3);
+        map.setLayerIndex(greenPharmacyLayer['tabs-'+x], map.layers.length-2);
+        ukryjWarstwyAptek(null, x);
+      }
+      map.addLayer(humanLayer);
+      
+      map.setLayerIndex(humanLayer, map.layers.length-1);
+    }
+    
+    function wyczyscWartweAptekiZZakladki(tab) {
+      if (selektor != undefined)
+        selektor.unselectAll();
+      if (greenPharmacyLayer[tab] != undefined)
+        greenPharmacyLayer[tab].removeAllFeatures();
+      if (yellowPharmacyLayer[tab] != undefined)
+        yellowPharmacyLayer[tab].removeAllFeatures();
+      if (grayPharmacyLayer[tab] != undefined)
+        grayPharmacyLayer[tab].removeAllFeatures();
+    }
+    
+    function wyczyscWszystkieWarstwyAptek() {
+      for (var x = 1; x <= iloscZakladek; x++) {
+        wyczyscWartweAptekiZZakladki('tabs-'+x);
+      }
+    }
+    
+    function ukryjWszystkieWarstwyAptek() {
+      for (var x = 1; x <= iloscZakladek; x++) {
+        ukryjWarstwyAptek(null, x);
+      }
+    }
+    
+    function ukryjWarstwyAptek(tab, x) {
+      if (x != undefined)
+        tab = 'tabs-'+x;
+      ukryjWarstwe(grayPharmacyLayer[tab]);
+      ukryjWarstwe(greenPharmacyLayer[tab]);
+      ukryjWarstwe(yellowPharmacyLayer[tab]);
+    }
+    
+    function pokazWarstwyAptek(tab) {
+      pokazWarstwe(greenPharmacyLayer[tab]);
+      pokazWarstwe(grayPharmacyLayer[tab]);
+      pokazWarstwe(yellowPharmacyLayer[tab]);
+    }
+    
+    function oddalWidok(tab) {
+      var bounds;
+      
+      if (humanLayer.features.length > 0)
+        bounds = humanLayer.getDataExtent();
+      
+      if (tab != undefined) {
+        ukryjWszystkieWarstwyAptek();
+        pokazWarstwyAptek(tab);
+        
+        if (grayPharmacyLayer[tab] != undefined && grayPharmacyLayer[tab].features.length > 0)
+          bounds = extendBounds(bounds, grayPharmacyLayer[tab].getDataExtent());
+        if (greenPharmacyLayer[tab] != undefined && greenPharmacyLayer[tab].features.length > 0)
+          bounds = extendBounds(bounds, greenPharmacyLayer[tab].getDataExtent());
+        if (yellowPharmacyLayer[tab] != undefined && yellowPharmacyLayer[tab].features.length > 0)
+          bounds = extendBounds(bounds, yellowPharmacyLayer[tab].getDataExtent());
+      }
+      
+      map.zoomToExtent(bounds);
+      if (map.getZoom() > 16) {
+        map.setCenter(map.getCenter(), 16);
+      }
+    }
+    
+    function extendBounds(bounds, secondBounds) {
+      var pinHeight = 8;
+      if (bounds != undefined)
+        bounds.top = bounds.top + pinHeight;
+      
+      if (secondBounds != undefined)
+        secondBounds.top = secondBounds.top + pinHeight;
+      
+      if (bounds != undefined)
+        bounds.extend(secondBounds);
+      else
+        bounds = secondBounds;
+      return bounds;
+    }
+    
+    function ukryjWarstwe(layer) {
+      if(layer != undefined && layer.getVisibility())
+        layer.setVisibility(false);
+    }
+    
+    function ukryjWarstwyZakladki(tab) {
+      ukryjWarstwe(grayPharmacyLayer[tab]);
+      ukryjWarstwe(greenPharmacyLayer[tab]);
+      ukryjWarstwe(yellowPharmacyLayer[tab]);
+    }
+    
+    function pokazWarstwe(layer) {
+      if(layer != undefined && !layer.getVisibility() && layer.features.length > 0 )
+        layer.setVisibility(true);
+    }
+    
+    function pokazWarstwyZakladki(tab) {
+      pokazWarstwe(grayPharmacyLayer[tab]);
+      pokazWarstwe(greenPharmacyLayer[tab]);
+      pokazWarstwe(yellowPharmacyLayer[tab]);
+    }
+    
+    function dodajPlacowkeDoMapy(idSwiadczeniodawcyRZOZ, szerokoscGeo, dlugoscGeo, nazwa, kodPocztowy, miejscowosc, ulica, telefon, kolor, nswd, tab) {
+      var regex = new RegExp(' ', 'g');
+      
+    var point = new OpenLayers.Geometry.Point( dlugoscGeo, szerokoscGeo ).transform(fromProjection, toProjection);
+    // !!! Zmienna i była zadeklarowana jako globalna - czy ten skrypt powinien tu być? !!!
+//       if(kolor == 'green' && greenPharmacyLayer[tab] != null)
+//       for(var i=0;i<greenPharmacyLayer[tab].features.length;i++){
+//         if(greenPharmacyLayer[tab].features[i].geometry.equals(point)){
+//           console.log("juz jest, nie dodaje");
+//           return;
+//         }
+//       }
+//       if(kolor == 'yellow' && greenPharmacyLayer[tab] != null)
+//       for(var i=0;i<yellowPharmacyLayer[tab].features.length;i++){
+//         if(yellowPharmacyLayer[tab].features[i].geometry.equals(point)){
+//           console.log("juz jest, nie dodaje");
+//           return;
+//         }
+//       }
+//       if(kolor == 'gray' && greenPharmacyLayer[tab] != null)
+//       for(var i=0;i<grayPharmacyLayer[tab].features.length;i++){
+//         if(grayPharmacyLayer[tab].features[i].geometry.equals(point)){
+//           console.log("juz jest, nie dodaje");
+//           return;
+//         }
+//       }
+      //console.log("nie ma, dodaje");
+      var aktualneInfoSpan = $('#aktualneInfoTekst_' + tab + '_' + nswd);
+      if (aktualneInfoSpan != undefined) {
+        var aktualneInfoColor = aktualneInfoSpan.attr('data-color');
+        var aktualneInfoTekst = aktualneInfoSpan.html();
+        if (aktualneInfoColor != undefined && aktualneInfoColor != 'gray')
+          var buttonHtml = '<div class="t-a:c"><a href="javascript:undefined" class="b:pri b:s"' +
+                           '     onclick="gaHit(\'Oferty\',\'Pokaż ofertę\',\'Id apteki: '+ nswd +'\'); ' +
+                           '              scrollDoAptekiNaLiscie(\''+ tab +'-'+ nswd +'\')">Pokaż ofertę</a></div>';
+      }
+      
+      var wizytowkaHref;
+      if(idSwiadczeniodawcyRZOZ === '#'){
+        wizytowkaHref = '<a href="#">' + nazwa + '</a>';
+      } else {
+        wizytowkaHref = '<a href="' + '/placowkaMedyczna/wizytowka/' + idSwiadczeniodawcyRZOZ + '">' + nazwa + '</a>';
+      }
+      
+      var opis = '<div><dl>' +
+        ('true' == 'true' ? '<dt class="font--xs">' : '<dt class="font--s">') + wizytowkaHref + '</dt>' +
+        ('true' == 'true' ? '<dd class="font--xs">' : '<dd class="font--s">') + kodPocztowy + ' ' + miejscowosc +', ' + ulica + '</dd>' +
+        (aktualneInfoTekst != undefined ? '<span class="font--s ' + aktualneInfoColor + '">' + aktualneInfoTekst + '</span>' : '') +
+        '</div>' +
+        (buttonHtml != undefined ? buttonHtml : '');
+      
+      var feature = new OpenLayers.Feature.Vector(
+        new OpenLayers.Geometry.Point( dlugoscGeo, szerokoscGeo ).transform(fromProjection, toProjection),
+        {description: opis} ,
+        {externalGraphic: 'https://cdn.osoz.pl/lbk/themes/default/images/mapa/lekiOnline/pin-apteka-' + kolor + '.png', graphicHeight: 32, graphicWidth: 32, graphicXOffset:-16, graphicYOffset:-32  }
+      );
+      
+      if (kolor == 'yellow' && yellowPharmacyLayer[tab] != null) {
+        yellowPharmacyLayer[tab].addFeatures(feature);
+      } else if (kolor == 'green' && greenPharmacyLayer[tab] != null) {
+        greenPharmacyLayer[tab].addFeatures(feature);
+      } else if (kolor == 'gray' && grayPharmacyLayer[tab] != null) {
+        grayPharmacyLayer[tab].addFeatures(feature);
+      } else if (kolor == 'sklep' && grayPharmacyLayer[tab] != null) {
+        grayPharmacyLayer[tab].addFeatures(feature);
+      }
+      mapaNswdApteka[nswd]=feature;
+      return feature.id;
+    }
+    
+    function dodajStart(dlugoscGeo, szerokoscGeo) {
+      if (szerokoscGeo != undefined && dlugoscGeo != undefined) {
+        var feature = new OpenLayers.Feature.Vector(
+          new OpenLayers.Geometry.Point(dlugoscGeo, szerokoscGeo).transform(fromProjection, toProjection),
+          {description:'<div><p><b>Tutaj&nbsp;jesteś!</b></p></div>'} ,
+          {externalGraphic: 'https://cdn.osoz.pl/lbk/themes/default/images/mapa/lekiOnline/pins-man.png', graphicHeight: 32, graphicWidth: 32, graphicXOffset:-16, graphicYOffset:-32}
+        );
+        
+        humanLayer.addFeatures(feature);
+      }
+    }
+    
+    function zmienStart(dlugoscGeo, szerokoscGeo) {
+        humanLayer.removeAllFeatures();
+        dodajStart(dlugoscGeo, szerokoscGeo);
+    }
+    
+    function dodajSelektory() {
+      var warstwy = new Array();
+      warstwy.push(humanLayer);
+      for (var x = 1; x<=iloscZakladek; x++) {
+        warstwy.push(yellowPharmacyLayer['tabs-'+x]);
+        warstwy.push(greenPharmacyLayer['tabs-'+x]);
+        warstwy.push(grayPharmacyLayer['tabs-'+x]);
+      }
+      selektor = new OpenLayers.Control.SelectFeature(warstwy, { onSelect: createPopup, onUnselect: destroyPopup });
+      map.addControl(selektor);
+      selektor.activate();
+    }
+    
+    function createPopup(feature) {
+      feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+        feature.geometry.getBounds().getCenterLonLat(),
+        new OpenLayers.Size(160, 50),
+        feature.attributes.description,
+        null,
+        true,
+        function() { selektor.unselectAll(); }
+      );
+      feature.popup.keepInMap = true;
+      feature.popup.autoSize = false;
+      feature.popup.panMapIfOutOfView=false;
+      map.addPopup(feature.popup);
+    }
+    
+    function destroyPopup(feature) {
+      if(feature.popup != null)
+        feature.popup.destroy();
+      feature.popup = null;
+    }
+    
+    function getFeature(featureId, tab, kolor) {
+      var feature;
+      
+      if (kolor == 'yellow') {
+        return feature = yellowPharmacyLayer[tab].getFeatureById(featureId);
+      }
+      else if (kolor == 'green') {
+        return feature = greenPharmacyLayer[tab].getFeatureById(featureId);
+      }
+      else if (kolor == 'gray') {
+        return feature = grayPharmacyLayer[tab].getFeatureById(featureId);
+      }
+      else if (kolor == 'sklep') {
+        return feature = grayPharmacyLayer[tab].getFeatureById(featureId);
+      }
+    }
+    
+    function pokazNaMapie(featureId, tab, kolor) {
+      var feature = getFeature(featureId, tab, kolor);
+      if (feature != undefined) {
+        animateScrollToObject($('html'));
+        przyblizDoObiektu(feature);
+        selektor.clickFeature(feature);
+      }
+    }
+    
+    function scrollDoAptekiNaLiscie(id) {
+      $("html, body").animate({ scrollTop : $('#' + id).offset().top-67 }, 'slow'); //67 - wysokość pływającego wyszukiwania leków (nie pobierane dynamicznie ponieważ może być inna przed i po scrollu)
+    }
+    
+    function animateScrollToObject(object){
+      $("html, body").animate({ scrollTop : $(object).offset().top }, 'slow');
+    }
+      
+    
+    function scrollToObjectMobile(object){
+      $('#listaAptek').scrollTop($('#listaAptek').scrollTop() + -($('#listaAptek').offset().top - object.offset().top))
+    }
+      
+    function pokazNaMapieMobile(featureId, tab, kolor, target) {
+      var feature = getFeature(featureId, tab, kolor);
+      if (feature != undefined) {
+        scrollToObjectMobile($(target).closest('.results-item'));
+        przyblizDoObiektu(feature);
+        selektor.clickFeature(feature);
+      }
+    }
+    
+    function przyblizDoObiektu(feature) {
+      if (feature != undefined && humanLayer != undefined) {
+        var bounds;
+        if (humanLayer.features.length > 0)
+          bounds = humanLayer.getDataExtent();
+        bounds = extendBounds(bounds, feature.geometry.getBounds());
+        if (bounds != undefined) {
+          map.zoomToExtent(bounds);
+        }
+      }
+    }
+    
+    function sprawdzCzySaAptekiNaZakladce(tab) {
+      if ((greenPharmacyLayer[tab] != undefined && greenPharmacyLayer[tab].features.length > 0) ||
+          (yellowPharmacyLayer[tab] != undefined && yellowPharmacyLayer[tab].features.length > 0) ||
+          (grayPharmacyLayer[tab] != undefined && grayPharmacyLayer[tab].features.length > 0))
+        return true;
+      return false;
+    }
+    
+    function pokazNaMapieRon(featureId, tab, kolor) {
+      var feature = getFeature(featureId, tab, kolor);
+      if (feature != undefined) {
+        //animateScrollToObject($('html'));
+        przyblizDoObiektu(feature);
+//         selektor.clickFeature(feature);
+      }
+    }
+    
+    </script></div></div><hr class="phablet-max"/></div></div></section><script>
+
+function pokazMape(){
+  uruchomMape();
+  var szerokoscGeograficzna = '50.0646737';
+  var dlugoscGeograficzna = '19.9523712';
+  if (szerokoscGeograficzna.length > 0 && dlugoscGeograficzna.length > 0) {
+    var ulica = 'Lubicz';
+    if ('true' == 'true')
+      ulica += ' ' + '23A';
+    var featureId = dodajPlacowkeDoMapy('#', szerokoscGeograficzna, dlugoscGeograficzna,
+        'POLMED SPÓŁKA AKCYJNA ', '31-503', 'Kraków',
+        ulica, '', 'green', '', 'tabs-1');
+    pokazNaMapieRon(featureId, 'tabs-1', 'green');
+    oddalWidok('tabs-1');
+  } else {
+    ustawPozycjeNaPolske();
+  }
+}
+function ustawPozycjeNaPolske() {
+  var position = new OpenLayers.LonLat(19,52).transform( fromProjection, toProjection);
+  map.setCenter(position,5)
+}
+function toggleOpisPlacowki() {
+  var stan = $('#opisPlacowkiDiv').attr('data-state');
+  if (stan == 'collapsed') {
+    $('#opisPlacowkiDiv').attr('data-state', 'expanded');
+    $('#opisPlacowkiRozwin').html(mniej_lower + "&nbsp;&laquo;");
+  } else {
+    $('#opisPlacowkiDiv').attr('data-state', 'collapsed');
+    $('#opisPlacowkiRozwin').html(wiecej_lower + "&nbsp;&raquo;");
+  }
+}
+
+</script></section><section class="box" id="wizytowkaPoradnie"><script>
+    
+    function statKlikPoradyZdalne(sort, idZasobu, idKomorki, idRZOZ, widok, typ){
+        if(sort === 'SORT_ZDALNA') {
+            wyslijStatystyke(idZasobu, idKomorki, idRZOZ, widok, typ);
+        }
+    }
+    
+    function statKlikPoradyZdalneBaner(sort, idZasobu, idKomorki, idRZOZ, widok, linkTerminu){
+        // typ = symbol z TypStatystykiKliknieciaEnum:  X=default,  K=telefonicznaBaner,  L=onlineBaner 
+        var typ = 'X';  // X=default
+        if(linkTerminu != null && linkTerminu.length > 2){
+            var sufiks = linkTerminu.substring(linkTerminu.length - 3);
+            if(sufiks === 'tpb') typ = 'K';  // K=telefoniczna
+            if(sufiks === 'opb') typ = 'L';  // L=online
+        } 
+        statKlikPoradyZdalne(sort, idZasobu, idKomorki, idRZOZ, widok, typ);
+    }
+    
+    function pokazTelefon(btn) {
+      var data_tel_link = $(btn).attr('data-tel-btn');
+      $(document).find('[data-tel-btn="' + data_tel_link + '"]').hide();
+      $(document).find('[data-tel-link="' + data_tel_link + '"]').show();
+      if(data_tel_link.includes("__rejestracja")){
+          data_tel_link = data_tel_link.replace("__rejestracja", "");
+      } 
+      $(document).find('[data-tel-link="info_' + data_tel_link + '"]').show();
+      var id = $(btn).attr("id");
+      var idx = typeof($(btn).attr("data-idx")) == 'undefined' ? "" : $(btn).attr("data-idx");
+      var widok = typeof($(btn).attr("data-widok")) == 'undefined' ? "" : $(btn).attr("data-widok");
+      var idZasobu;
+      var idKomorki;
+      var idSwiadczeniodawcyRZOZ;
+      if (id.indexOf('KOL_') != -1 || id.indexOf('PRV_') != -1 || id.indexOf('NFZ_') != -1 || id.indexOf('KOM_') != -1) {
+        if (widok == 'TER') {
+          var kafelNadrzedny = $("#btn_telefon_header");
+        } else {
+          var kafelNadrzedny = $("#btn_telefon_"+idx);
+        }
+        idZasobu = typeof(kafelNadrzedny.attr("data-idZasobu")) == 'undefined' ? null : kafelNadrzedny.attr("data-idZasobu");
+        idKomorki = typeof(kafelNadrzedny.attr("data-idKomorki")) == 'undefined' ? null : kafelNadrzedny.attr("data-idKomorki");
+        idSwiadczeniodawcyRZOZ = typeof(kafelNadrzedny.attr("data-idRZOZ")) == 'undefined' ? null : kafelNadrzedny.attr("data-idRZOZ");
+      } else {
+        idZasobu = typeof($(btn).attr("data-idZasobu")) == 'undefined' ? null : $(btn).attr("data-idZasobu");
+        idKomorki = typeof($(btn).attr("data-idKomorki")) == 'undefined' ? null : $(btn).attr("data-idKomorki");
+        idSwiadczeniodawcyRZOZ = typeof($(btn).attr("data-idRZOZ")) == 'undefined' ? null : $(btn).attr("data-idRZOZ");
+      }
+      if("true" === 'true') {
+          wyslijStatystyke(idZasobu, idKomorki, idSwiadczeniodawcyRZOZ, widok, 'T');
+      }
+      obslugaPopupGSL(btn, widok);
+      $(btn).next().focus();
+    }
+    
+    function obsluzChecZamowieniaRecepty(btn) {
+      var idZasobu = $(btn).parent().parent().attr("data-idx");
+      
+      var kafelNadrzedny = $($(document).find('a[data-idZasobu="' + idZasobu + '"],input[data-idZasobu="' + idZasobu + '"]')[0]);
+      var widok = typeof(kafelNadrzedny.attr("data-widok")) == 'undefined' ? null : kafelNadrzedny.attr("data-widok");
+      var idKomorki = typeof(kafelNadrzedny.attr("data-idKomorki")) == 'undefined' ? null : kafelNadrzedny.attr("data-idKomorki");
+      var idSwiadczeniodawcyRZOZ = typeof(kafelNadrzedny.attr("data-idRZOZ")) == 'undefined' ? null : kafelNadrzedny.attr("data-idRZOZ");
+        
+      if("true" === 'true') {
+          wyslijStatystyke(idZasobu, idKomorki, idSwiadczeniodawcyRZOZ, widok, 'R');
+      }
+      $(document).find('[data-idx="' + idZasobu + '-hid"]').show();
+      $(document).find('[data-idx="' + idZasobu + '"]').hide();
+      $(btn).next().focus();
+    }
+    
+    function wyslijStatystyke(idZasobu, idKomorki, idRZOZ, widok, typ) {
+      $.ajax({
+        url: '/lbk-www/lekarzebezkolejki/wyslijStatystyke',
+        type: 'post', 
+        async: false,
+        datatype: 'json',
+        data: {
+          typ: typ,
+          nrzj: idRZOZ,
+          ntrz: idZasobu,
+          nrzk: idKomorki,
+          widok: widok
+        }
+      })
+    }
+
+    function pokazDanePlacowki(btn) {
+      var idx = typeof($(btn).attr("data-idx")) == 'undefined' ? "" : $(btn).attr("data-idx");
+      $(btn).next().focus();
+      $('.divDanePlacowki_' + idx).each(function() {
+        $(this).show();
+      });
+      $('#placowkaInfo_' + idx).each(function() {
+        $(this).show();
+      });
+      $('.btnDanePlacowki_' + idx).each(function() {
+        $(this).hide();
+      });
+    }
+    
+    function obslugaPopupGSL(btn, widok) {
+      if ( 'false' === 'true') {
+        var czyGSL = $(btn).parent().parent().parent().parent().parent().attr('id');
+        if (typeof czyGSL === 'undefined' ) {
+          czyGSL = $(btn).parent().parent().parent().parent().parent().parent().attr('id');
+        }
+        if (czyGSL.indexOf("wynik_poradnia") >= 0) {
+          var ind = $(btn).attr('data-tel-btn');
+          var phoneNumber = $(document).find('a[data-tel-link="' + ind + '"]').first().text();
+        
+          $("#tel_placowki_m").html('<i class="icon-32 icon-phone"></i><span>' + phoneNumber + '</span>');
+          $('#gsl_tel_poradania').html('<b>' + phoneNumber + '</b>');
+          $("#tel_placowki_m").attr('href', 'tel:' + phoneNumber.replace(/\s+/g, ''));
+        
+          testujCzyWyswietlicPopup(widok);
+        }
+      }
+    	return "";
+    }
+    
+    function testujCzyWyswietlicPopup(widok) {
+      $.ajax({
+          type : 'get',
+          url: '/lbk-www/lekarze/czyWyswietlicPopupAjax',
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          cache: false,
+          success: function(msg) {
+            result = msg;
+            var czyWyswietlonyPopup = "";
+            if (msg === true) {
+              $("#telDialog1").dialog("open");
+              czyWyswietlonyPopup = "M";
+            }
+            
+            if("true" === 'true') {
+              if (czyWyswietlonyPopup === 'M') {
+                wyslijStatystyke(null, null, null, widok, 'M');
+              }
+            }
+          }
+      });
+    }
+  
+  </script><script>
+    function statKlikBanerWiecejTerminow(){
+      wyslijStatystyke(null, null, null, 'WYS', 'N');
+    }
+    function statystykaPokazanoOkienkoAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'A');
+    }
+    function statystykaKliknietoOkienkoMobilneAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'B');
+    }
+    function statystykaKliknietoOkienkoDesktopAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'C');
+    }
+    function statystykaKliknietoOkienkoTelefonAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'D');
+    }
+    function statystykaKliknietoOkienkoStronaAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'E');
+    }
+    
+    function statystykaKliknietoZadzwonAhepDesktop() {
+      wyslijStatystyke(null, null, null, 'GLW', 'F');
+    }
+    function statystykaKliknietoZadzwonAhepMobile() {
+      wyslijStatystyke(null, null, null, 'GLW', 'G');
+    }
+    function statystykaKliknietoRegulaminAhepDesktop() {
+      wyslijStatystyke(null, null, null, 'GLW', 'H');
+    }
+    function statystykaKliknietoRegulaminAhepMobile() {
+      wyslijStatystyke(null, null, null, 'GLW', 'I');
+    }
+  </script><article class="terminy-panel"><section class="terminy-profile"><div class="terminy-header"><figure class="th-avatar"><img alt="Awatar poradni" src="https://cdn.osoz.pl/lbk/themes/images/poradnia0.jpg"/></figure><div class="th-dane"><h2 class="thd-name"><a>Poradnia lekarza POZ</a></h2></div></div><div><div class="p-icon"><i class="icon-16 icon-phone c:green"></i><span>Telefon:&nbsp;</span><button onclick="pokazTelefon(this)" data-idKomorki="" data-idRZOZ="1368767" data-idZasobu="" data-widok="WIZ" data-idx="0" data-tel-btn="link_telefon_0" id="btn_telefon_0" class="b:sec b:xs" type="button">Wyświetl numer<span class="v-h">telefonu do&nbsp;placowki</span></button><a href="tel:+48122984740" aria-live="polite" class="d:i-b m-l:s" style="display: none;" data-tel-link="link_telefon_0">+48 12 298 47 40</a></div><div data-tel-link="info_link_telefon_0" style="display: none;" class="msg:info"><p>Podczas rozmowy powołaj się na&nbsp;serwis LekarzeBezKolejki.pl</p></div></div><p class="p-icon c:yellow"><i class="icon-16 icon-clock c:i"></i><button data-slider="godziny_1368767_" class="f-s:s switcher chevron c:i" title="Sprawdź godziny otwarcia plac&oacute;wki" type="button"><span>Niebawem zamykamy<span class="w-s:n">&#32;08:00 - 18:00</span></span></button></p>&#32;
+            <div style="display: none;" id="godziny_1368767_"><h4>Czynne w&nbsp;godzinach</h4><div class="toggled"><dl><dt class="t-t:l"><span class="w-s:n">poniedziałek - piątek</span></dt><dd>
+      <b class="w-s:n">08:00 - 18:00</b>
+    </dd></dl></div></div></section><section class="terminy-lista"><h3 class="terminy-poradnia"><span>Poradnia lekarza POZ</span></h3><div class="terminy-row"><div class="termin-box t-gab t-desc"><div><header><span class="tb-lead">Zarezerwuj wizytę telefonicznie</span><span></span></header></div><div><p class="m-t:xxl m-b:xxl t-a:l f-s:s">Rejestracja do&nbsp;tej poradni wymaga telefonicznego kontaktu z&nbsp;przychodnią pod numerem:
+                        <a href="tel:+48122984740">+48 122 984 740</a></p></div></div></div></section></article></section></div></div></div><script>
+var tekst = "";
+var specjalnosc = "";
+var platnik = "";
+var usluga = "";
+var minWynik;
+
+var templateHtml = $("#kafelCommonTerminyTemplate").html();
+
+$('#zasobyFiltruj').keyup(function() {
+  minWynik = false;
+  pobierzFiltry();
+  
+  $("[id*='h2poradnia_']").hide();
+  $("[id*='lekarz_']").hide();
+  $("[id*='gabinet_']").hide();
+  $("[id*='poradnia_']").hide();
+  
+  filtruj();
+  okienkoBrakWynikow(minWynik);
+});
+
+function zmienInformacjeOWyszukiwaniu(){
+  $("div[id^='szukaj_msg_spec']").each(function(){
+    $(this).hide();
+  });
+  var idPoradni = $('#lekarze_filtr_poradnia').val();
+  
+  if (!idPoradni) {
+    $("#szukaj_msg_spec").show();
+  }
+  if (idPoradni == '-1') {
+    $("#szukaj_msg_spec").show();
+  } else {
+    $("#szukaj_msg_spec" + idPoradni).show();
+  }
+  
+}
+
+function filtrujPoradnie() {
+  zmienInformacjeOWyszukiwaniu();
+  
+  minWynik = false;
+  pobierzFiltry();
+  
+  kolejka_kafli_licznik = 0;
+  $.ajaxq.clear('kolejka_kafli_wizytowki');
+  
+  $("[id*='h2poradnia_']").hide();
+  $("[id*='lekarz_']").hide();
+  $("[id*='gabinet_']").hide();
+  $("[id*='poradnia_']").hide();
+  
+  ustawZnaczniki();
+  $("[id*='lekarz_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+    $(this).prevAll("[id*='h2poradnia_']").first().show();
+    $("article[id='" + this.id +"']").trigger('pobierz_kafel');
+    minWynik = true;
+  });
+  $("[id*='gabinet_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+    $(this).prevAll("[id*='h2poradnia_']").first().show();
+    $("article[id='" + this.id +"']").trigger('pobierz_kafel');
+    minWynik = true;
+  });
+  
+  okienkoBrakWynikow(minWynik);
+}
+
+function filtrujUslugi() {
+  minWynik = false;
+  pobierzFiltry();
+  
+  $("[id*='h2poradnia_']").hide();
+  $("[id*='lekarz_']").hide();
+  $("[id*='gabinet_']").hide();
+  $("[id*='poradnia_']").hide();
+  
+  if (usluga == -1) {
+    filtruj();
+    $("[id*='uslugiPlatne_']").show();
+    $("[id*='urlPokazUslugiTerminarz_']").show();
+    $("[id*='ukryteUslugi_']").hide();
+  } else {
+    filtruj();
+    $("[id*='uslugiPlatne_']").hide();
+    $("[id*='urlPokazUslugiTerminarz_']").hide();
+    $("[id*='ukryteUslugi_']").show();
+  }
+  okienkoBrakWynikow(minWynik);
+}
+
+function filtrujSkierowanie() {
+    zmienInformacjeOWyszukiwaniu();
+
+    minWynik = false;
+    pobierzFiltry();
+
+    var selectedSkierowanieType = $('#filterSkierowanieWizytowka option:selected').data('val') || 'REF_BRAK';
+    window.lbkSkierowanieType = selectedSkierowanieType;
+
+    kolejka_kafli_licznik = 0;
+    $.ajaxq.clear('kolejka_kafli_wizytowki');
+
+    $("[id*='h2poradnia_']").hide();
+    $("[id*='lekarz_']").hide();
+    $("[id*='gabinet_']").hide();
+    $("[id*='poradnia_']").hide();
+
+    ustawZnaczniki();
+
+
+    $("[id*='lekarz_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+        $(this).attr('data-czyPobranoKafla', 'false');
+        $(this).find("section#sekcjaKafla").html(templateHtml);
+        $(this).prevAll("[id*='h2poradnia_']").first().show();
+        $("article[id='" + this.id +"']").trigger('pobierz_kafel');
+        minWynik = true;
+    });
+    $("[id*='gabinet_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+        $(this).attr('data-czyPobranoKafla', 'false');
+        $(this).find("section#sekcjaKafla").html(templateHtml);
+        $(this).prevAll("[id*='h2poradnia_']").first().show();
+        $("article[id='" + this.id +"']").trigger('pobierz_kafel');
+        minWynik = true;
+    });
+    $("[id*='poradnia_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+        $(this).attr('data-czyPobranoKafla', 'false');
+        $(this).find("section#sekcjaKafla").html(templateHtml);
+        $(this).prevAll("[id*='h2poradnia_']").first().show();
+        $("article[id='" + this.id +"']").trigger('pobierz_kafel');
+        minWynik = true;
+    });
+    filtruj();
+}
+
+function filtrujPlatnika() {
+   minWynik = false;
+   pobierzFiltry();
+   
+   var wynikiGSL = [];
+   wynikiGSL = $("[id*='wynik_poradnia']").toArray();
+   if (wynikiGSL.length > 0)
+     minWynik = true;
+  
+   $("[id*='h2poradnia_']").hide();
+   $("[id*='lekarz_']").hide();
+   $("[id*='gabinet_']").hide();
+   
+   ustawZnaczniki();
+   $("[id*='lekarz_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+     $(this).prevAll("[id*='h2poradnia_']").first().show();
+     minWynik = true;
+   });
+   $("[id*='gabinet_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+     $(this).prevAll("[id*='h2poradnia_']").first().show();
+     minWynik = true;
+   });
+   okienkoBrakWynikow(minWynik);
+  }
+  
+function okienkoBrakWynikow(minWynik) {
+ if (!minWynik)
+   $('#brakWynikowFiltrowania').show();
+ else
+   $('#brakWynikowFiltrowania').hide();
+}
+
+function pobierzFiltry() {
+  platnik = $("#lekarze_filtr_platnik").val();
+  usluga = $("#lekarze_filtr_usluga").val();
+  specjalnosc = $("#lekarze_filtr_poradnia").val();
+  tekst = $('#zasobyFiltruj').val();
+}
+
+function ustawZnaczniki() {
+  if (tekst != "" && typeof(tekst) != 'undefined' && tekst != null && tekst.length > 0)
+    tekst = "[id*="+tekst.toUpperCase()+"]";
+  else
+    tekst = "";
+  
+  if (specjalnosc != -1 && specjalnosc != "" && typeof(specjalnosc) != 'undefined')
+    specjalnosc = "[id*='XXX_"+specjalnosc+"']";
+  else
+    specjalnosc = "";
+  
+  if (usluga != "" && typeof(usluga) != 'undefinied' && usluga != null && usluga != -1)
+    usluga = "div[id*='Uslugi_'] p[id='uslugiPlatne_" + usluga + "']";
+  else
+    usluga = "div";
+  
+  if (platnik == "PLAT_NFZ")
+    platnik = "div[class*='NFZ'] a[data-dataval], div[class*='KOL'] a[data-dataval], div[data-typ*='TEL-NFZ'] a[data-dataval], div[class*='termin-box t-nfz t-gat'] a[data-dataval], div[class*='termin-box t-nfz t-tel'] a[data-dataval], div[class*='termin-box t-nfz t-gab'] a[data-dataval]";
+  else if (platnik == "PLAT_PRV")
+    platnik = "div[class*='PRV'] a[data-dataval], div[class*='TEL-PRV'] a[data-dataval], div[class*='termin-box t-prv t-gat'] a[data-dataval], div[class*='termin-box t-prv t-tel'] a[data-dataval], div[class*='termin-box t-prv t-gab'] a[data-dataval]";
+  else if (platnik == "PLAT_ABO")
+      platnik = "div[class*='ABO'] a[data-dataval], div[class*='TEL-ABO'] a[data-dataval], div[class*='termin-box t-abo t-gat'] a[data-dataval], div[class*='termin-box t-abo t-tel'] a[data-dataval], div[class*='termin-box t-abo t-gab'] a[data-dataval]";
+  else
+    platnik = "div";
+  
+}
+
+function filtruj() {
+  ustawZnaczniki();
+  $("[id*='lekarz_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+    $(this).prevAll("[id*='h2poradnia_']").first().show();
+    minWynik = true;
+  });
+  $("[id*='gabinet_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+    $(this).prevAll("[id*='h2poradnia_']").first().show();
+    minWynik = true;
+  });
+  $("[id*='poradnia_']" + specjalnosc + tekst).has(usluga).has(platnik).show().each(function() {
+    $(this).prevAll("[id*='h2poradnia_']").first().show();
+    minWynik = true;
+  });
+}
+
+</script><script>
+    
+    function statKlikPoradyZdalne(sort, idZasobu, idKomorki, idRZOZ, widok, typ){
+        if(sort === 'SORT_ZDALNA') {
+            wyslijStatystyke(idZasobu, idKomorki, idRZOZ, widok, typ);
+        }
+    }
+    
+    function statKlikPoradyZdalneBaner(sort, idZasobu, idKomorki, idRZOZ, widok, linkTerminu){
+        // typ = symbol z TypStatystykiKliknieciaEnum:  X=default,  K=telefonicznaBaner,  L=onlineBaner 
+        var typ = 'X';  // X=default
+        if(linkTerminu != null && linkTerminu.length > 2){
+            var sufiks = linkTerminu.substring(linkTerminu.length - 3);
+            if(sufiks === 'tpb') typ = 'K';  // K=telefoniczna
+            if(sufiks === 'opb') typ = 'L';  // L=online
+        } 
+        statKlikPoradyZdalne(sort, idZasobu, idKomorki, idRZOZ, widok, typ);
+    }
+    
+    function pokazTelefon(btn) {
+      var data_tel_link = $(btn).attr('data-tel-btn');
+      $(document).find('[data-tel-btn="' + data_tel_link + '"]').hide();
+      $(document).find('[data-tel-link="' + data_tel_link + '"]').show();
+      if(data_tel_link.includes("__rejestracja")){
+          data_tel_link = data_tel_link.replace("__rejestracja", "");
+      } 
+      $(document).find('[data-tel-link="info_' + data_tel_link + '"]').show();
+      var id = $(btn).attr("id");
+      var idx = typeof($(btn).attr("data-idx")) == 'undefined' ? "" : $(btn).attr("data-idx");
+      var widok = typeof($(btn).attr("data-widok")) == 'undefined' ? "" : $(btn).attr("data-widok");
+      var idZasobu;
+      var idKomorki;
+      var idSwiadczeniodawcyRZOZ;
+      if (id.indexOf('KOL_') != -1 || id.indexOf('PRV_') != -1 || id.indexOf('NFZ_') != -1 || id.indexOf('KOM_') != -1) {
+        if (widok == 'TER') {
+          var kafelNadrzedny = $("#btn_telefon_header");
+        } else {
+          var kafelNadrzedny = $("#btn_telefon_"+idx);
+        }
+        idZasobu = typeof(kafelNadrzedny.attr("data-idZasobu")) == 'undefined' ? null : kafelNadrzedny.attr("data-idZasobu");
+        idKomorki = typeof(kafelNadrzedny.attr("data-idKomorki")) == 'undefined' ? null : kafelNadrzedny.attr("data-idKomorki");
+        idSwiadczeniodawcyRZOZ = typeof(kafelNadrzedny.attr("data-idRZOZ")) == 'undefined' ? null : kafelNadrzedny.attr("data-idRZOZ");
+      } else {
+        idZasobu = typeof($(btn).attr("data-idZasobu")) == 'undefined' ? null : $(btn).attr("data-idZasobu");
+        idKomorki = typeof($(btn).attr("data-idKomorki")) == 'undefined' ? null : $(btn).attr("data-idKomorki");
+        idSwiadczeniodawcyRZOZ = typeof($(btn).attr("data-idRZOZ")) == 'undefined' ? null : $(btn).attr("data-idRZOZ");
+      }
+      if("true" === 'true') {
+          wyslijStatystyke(idZasobu, idKomorki, idSwiadczeniodawcyRZOZ, widok, 'T');
+      }
+      obslugaPopupGSL(btn, widok);
+      $(btn).next().focus();
+    }
+    
+    function obsluzChecZamowieniaRecepty(btn) {
+      var idZasobu = $(btn).parent().parent().attr("data-idx");
+      
+      var kafelNadrzedny = $($(document).find('a[data-idZasobu="' + idZasobu + '"],input[data-idZasobu="' + idZasobu + '"]')[0]);
+      var widok = typeof(kafelNadrzedny.attr("data-widok")) == 'undefined' ? null : kafelNadrzedny.attr("data-widok");
+      var idKomorki = typeof(kafelNadrzedny.attr("data-idKomorki")) == 'undefined' ? null : kafelNadrzedny.attr("data-idKomorki");
+      var idSwiadczeniodawcyRZOZ = typeof(kafelNadrzedny.attr("data-idRZOZ")) == 'undefined' ? null : kafelNadrzedny.attr("data-idRZOZ");
+        
+      if("true" === 'true') {
+          wyslijStatystyke(idZasobu, idKomorki, idSwiadczeniodawcyRZOZ, widok, 'R');
+      }
+      $(document).find('[data-idx="' + idZasobu + '-hid"]').show();
+      $(document).find('[data-idx="' + idZasobu + '"]').hide();
+      $(btn).next().focus();
+    }
+    
+    function wyslijStatystyke(idZasobu, idKomorki, idRZOZ, widok, typ) {
+      $.ajax({
+        url: '/lbk-www/lekarzebezkolejki/wyslijStatystyke',
+        type: 'post', 
+        async: false,
+        datatype: 'json',
+        data: {
+          typ: typ,
+          nrzj: idRZOZ,
+          ntrz: idZasobu,
+          nrzk: idKomorki,
+          widok: widok
+        }
+      })
+    }
+
+    function pokazDanePlacowki(btn) {
+      var idx = typeof($(btn).attr("data-idx")) == 'undefined' ? "" : $(btn).attr("data-idx");
+      $(btn).next().focus();
+      $('.divDanePlacowki_' + idx).each(function() {
+        $(this).show();
+      });
+      $('#placowkaInfo_' + idx).each(function() {
+        $(this).show();
+      });
+      $('.btnDanePlacowki_' + idx).each(function() {
+        $(this).hide();
+      });
+    }
+    
+    function obslugaPopupGSL(btn, widok) {
+      if ( 'false' === 'true') {
+        var czyGSL = $(btn).parent().parent().parent().parent().parent().attr('id');
+        if (typeof czyGSL === 'undefined' ) {
+          czyGSL = $(btn).parent().parent().parent().parent().parent().parent().attr('id');
+        }
+        if (czyGSL.indexOf("wynik_poradnia") >= 0) {
+          var ind = $(btn).attr('data-tel-btn');
+          var phoneNumber = $(document).find('a[data-tel-link="' + ind + '"]').first().text();
+        
+          $("#tel_placowki_m").html('<i class="icon-32 icon-phone"></i><span>' + phoneNumber + '</span>');
+          $('#gsl_tel_poradania').html('<b>' + phoneNumber + '</b>');
+          $("#tel_placowki_m").attr('href', 'tel:' + phoneNumber.replace(/\s+/g, ''));
+        
+          testujCzyWyswietlicPopup(widok);
+        }
+      }
+    	return "";
+    }
+    
+    function testujCzyWyswietlicPopup(widok) {
+      $.ajax({
+          type : 'get',
+          url: '/lbk-www/lekarze/czyWyswietlicPopupAjax',
+          contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          cache: false,
+          success: function(msg) {
+            result = msg;
+            var czyWyswietlonyPopup = "";
+            if (msg === true) {
+              $("#telDialog1").dialog("open");
+              czyWyswietlonyPopup = "M";
+            }
+            
+            if("true" === 'true') {
+              if (czyWyswietlonyPopup === 'M') {
+                wyslijStatystyke(null, null, null, widok, 'M');
+              }
+            }
+          }
+      });
+    }
+  
+  </script><script>
+    function statKlikBanerWiecejTerminow(){
+      wyslijStatystyke(null, null, null, 'WYS', 'N');
+    }
+    function statystykaPokazanoOkienkoAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'A');
+    }
+    function statystykaKliknietoOkienkoMobilneAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'B');
+    }
+    function statystykaKliknietoOkienkoDesktopAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'C');
+    }
+    function statystykaKliknietoOkienkoTelefonAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'D');
+    }
+    function statystykaKliknietoOkienkoStronaAhep() {
+      wyslijStatystyke(null, null, null, 'WYS', 'E');
+    }
+    
+    function statystykaKliknietoZadzwonAhepDesktop() {
+      wyslijStatystyke(null, null, null, 'GLW', 'F');
+    }
+    function statystykaKliknietoZadzwonAhepMobile() {
+      wyslijStatystyke(null, null, null, 'GLW', 'G');
+    }
+    function statystykaKliknietoRegulaminAhepDesktop() {
+      wyslijStatystyke(null, null, null, 'GLW', 'H');
+    }
+    function statystykaKliknietoRegulaminAhepMobile() {
+      wyslijStatystyke(null, null, null, 'GLW', 'I');
+    }
+  </script><script>
+
+$(document).ready(function() {
+  $("select[id='lekarze_filtr_usluga']").prop('disabled', 'disabled');
+  $("select[id='lekarze_filtr_platnik']").prop('disabled', 'disabled');
+});
+var wiecej_lower = 'więcej';
+var mniej_lower = 'mniej';
+
+function toggleUkryteUslugiZasobu(idWypisuUslug, ileWiecej) {
+  var widoczny = $('#ukryteUslugi_' + idWypisuUslug).is(":visible");
+  if (widoczny) {
+    $('#ukryteUslugi_' + idWypisuUslug).slideUp(200);
+    $('#urlPokazUslugiTerminarz_' + idWypisuUslug).html(wiecej_lower + ' (' + ileWiecej + ') &nbsp;&raquo;');
+  } else {
+    $('#ukryteUslugi_' + idWypisuUslug).slideDown(200);
+    $('#urlPokazUslugiTerminarz_' + idWypisuUslug).html(mniej_lower + '&nbsp;&laquo;');
+  }
+}
+
+//Tabs
+function selectTab(tabName) {
+  $("#wizytowkaPlacowki").tabs("option", "active", $(tabName + "Selector").index());
+}
+$(function() {
+  $("#wizytowkaPlacowki").tabs();
+  if ('false' == 'true') {
+    selectTab("#wizytowkaLekarze"); 
+  }
+  else if ('true' == 'true' || 'false' == 'true') {
+    selectTab("#wizytowkaPoradnie"); 
+  }
+  else {
+    selectTab("#wizytowkaInformacje");
+    if (0 > 0 && !wczytanaGaleria) {
+      initGaleria();
+      wczytanaGaleria = true;
+    }
+    pokazMape();
+  }
+});
+
+$('#wizytowkaPlacowki').tabs({
+  activate: function(event ,ui){
+    if (ui.newTab.index() == 0) {
+      if (0 > 0 && !wczytanaGaleria) {
+        initGaleria();
+        wczytanaGaleria = true;
+      }
+    } else if (ui.newTab.attr('id') == 'wizytowkaInformacjeSelector') {
+        pokazMape();
+        if (0 > 0 && !wczytanaGaleria) {
+          initGaleria();
+          wczytanaGaleria = true;
+        }
+    }
+  }
+});
+
+</script></div></div></div></div><footer class="page-footer"><div class="box content"><div style="align-items: start;" class="box footer-content"><div class="mg-5 tg-2 mp-1 pp-1 tp-1 dp-2 lp-2"><p><a target="blank" href="https://lekarzebezkolejki.pl/doc/RegulaminLBK.pdf" rel="nofollow" class="d:b">Regulamin</a><a href="#0" onclick="cm.changeSettings();" class="d:b">Ustawienia prywatności</a><a href="/informacje-dla-placowek" class="d:b">Informacje dla plac&oacute;wek</a><a href="/informacje-dla-lekarza" class="d:b">Dla Lekarza</a><a href="mailto:pomoc@lekarzebezkolejki.pl" rel="nofollow" class="d:b">Pomoc</a><a href="/misja" class="d:b">Misja</a></p></div><div class="mg-5 tg-1 dg-1"><p><a href="/reklama" class="d:b">Reklama</a><a href="/kontakt" class="d:b">Kontakt</a><a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=vuGcCUnDKESflPhQR2YEpikvpZgLBPtIic-MuvKsO-VURVpJQVNETUtIMjIzSE5ZSE5ZQ0RIOTkzSS4u&rb8dea8d3fa3049829c3c9a91616f5832=%22Portal%20Pacjenta%20%2F%20LekarzeBezKolejki%22" class="d:b">
+                Zgłoszenie podatności bezpieczeństwa
+              </a></p></div><div class="mg-5 mp-1 pg-1 dg-1"><p>&nbsp;</p></div><div class="mg-12 tg-5 dg-5 t-a:c"><div><p>Bezpłatna aplikacja VisiMed</p><a target="_blank" href="http://mobile.kamsoft.pl/pobierz/VisiMed/iOS?ctx=K00" rel="nofollow" class="store-data-apple"><img src="https://cdn.osoz.pl/lbk/themes/images/store-empty-apple.png" alt="Pobierz aplikację VisiMed z&nbsp;Apple Store"/></a>&nbsp;
+              <a target="_blank" href="http://mobile.kamsoft.pl/pobierz/VisiMed/Android?ctx=K00" rel="nofollow" class="store-data-google"><img src="https://cdn.osoz.pl/lbk/themes/images/store-empty-google.png" alt="Pobierz aplikację VisiMed z&nbsp;Google Play"/></a><a href="https://www.facebook.com/LekarzeBezKolejki/" rel="nofollow" class="d:b m-t"><p class="f-s:l m:0 d:i-b v-a:m c:white">Polub nas na</p><img src="https://cdn.osoz.pl/lbk/themes/images/facebook.png" class="v-a:m" alt="Napis facebook"/></a></div></div></div><div class="footer-copy"><p>&copy; KAMSOFT S.A.</p></div></div></footer></div></div><div style="display: none;" class="sidebar"><div class="sidebar-content"><div style="display: none;" id="hecon-hr" class="hecon-animation sidebarHecon"><a href="#"><img src="https://cdn.osoz.pl/lbk/themes/images/hecon.png" alt="Hecon"/></a></div><div class="sidebar-qanda"><a target="_blank" href="https://ktoMaLek.pl/pytania-i-odpowiedzi#zapytaj"><span class="sidebar-txt-d"><span>Masz problem zdrowotny?<br />Zadaj pytanie farmaceucie.</span></span><span class="sidebar-txt-m">Zapytaj<br />farmaceutę</span><img srcset="https://cdn.osoz.pl/lbk/themes/images/icon-qanda.svg" src="https://cdn.osoz.pl/lbk/themes/images/icon-qanda.png" class="sidebar-icon-off"/><img srcset="https://cdn.osoz.pl/lbk/themes/images/icon-qanda-on.svg" src="https://cdn.osoz.pl/lbk/themes/images/icon-qanda-on.png" class="sidebar-icon-on"/></a></div><script>
+     //
+       var SidebarQandA = function(){};
+       SidebarQandA.onQandAWidth = 465;
+       
+       SidebarQandA.showQandA = function () {
+         if ($('.sidebar:last')) {
+           if (!$('.sidebar:last').is(':visible')) {
+             $('.sidebar:last').show();
+           }
+           $('.sidebar-qanda').show();
+         }
+       };
+       
+       $(document).ready(function(){
+         if (typeof window['onQandALoad'] === 'function') {
+           window['onQandALoad']();
+         } else {
+           SidebarQandA.showQandA();
+         }
+      });
+     // </script></div></div><a id="back-to-top" href="#"><i class="icon-24 icon-chevron-up"> </i><span class="v-h">Przewiń na&nbsp;początek strony</span></a><script src="https://cdn.osoz.pl/lbk/javascript/lbk/init.min.js"></script></body></html>
