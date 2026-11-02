@@ -129,3 +129,64 @@ def test_state_roundtrip(tmp_path):
     assert loaded.fail_streak == 2
     assert loaded.saved_at == NOW
     assert State.load(tmp_path / "missing.json").seen == {}
+
+
+def test_watch_stops_on_event_and_logs_through_out(tmp_path, monkeypatch):
+    import threading
+
+    from terminator_nfz import watch as watch_module
+    from terminator_nfz.clinic import Clinic
+    from terminator_nfz.config import Config
+
+    clinic = Clinic("Przychodnia Testowa", "https://lekarzebezkolejki.pl/placowka/X", DOCTORS)
+    stop, wake = threading.Event(), threading.Event()
+    rounds = []
+
+    def fake_tile(_session, doc):
+        rounds.append(doc.id)
+        if len(rounds) == 2:
+            stop.set()
+            wake.set()
+        return FULL_HTML
+
+    monkeypatch.setattr(watch_module, "fetch_clinic", lambda _s, _u: clinic)
+    monkeypatch.setattr(watch_module, "fetch_tile", fake_tile)
+    monkeypatch.setattr(watch_module.config, "DELAY_BETWEEN_DOCTORS_S", 0)
+    lines = []
+    cfg = Config(clinic_url=clinic.url, interval_seconds=3600)
+
+    code = watch_module.watch(cfg, tmp_path / "state.json", Outbox(), out=lines.append, stop=stop, wake=wake)
+
+    assert code == 0
+    assert rounds == ["1", "2"]  # jedna runda, bez czekania godziny na następną
+    assert lines[0] == "Przychodnia Testowa: pilnuję 2 lekarzy: Anna Testowa, Jan Testowy"
+    assert "FULL×2" in lines[-1]
+
+
+def test_wake_starts_next_round_early(tmp_path, monkeypatch):
+    import threading
+
+    from terminator_nfz import watch as watch_module
+    from terminator_nfz.clinic import Clinic
+    from terminator_nfz.config import Config
+
+    clinic = Clinic("Przychodnia Testowa", "https://lekarzebezkolejki.pl/placowka/X", DOCTORS[:1])
+    stop, wake = threading.Event(), threading.Event()
+    rounds = []
+
+    def fake_tile(_session, _doc):
+        rounds.append(1)
+        if len(rounds) == 1:
+            wake.set()  # „Sprawdź teraz” w trakcie pierwszej rundy
+        else:
+            stop.set()
+        return FULL_HTML
+
+    monkeypatch.setattr(watch_module, "fetch_clinic", lambda _s, _u: clinic)
+    monkeypatch.setattr(watch_module, "fetch_tile", fake_tile)
+    monkeypatch.setattr(watch_module.config, "DELAY_BETWEEN_DOCTORS_S", 0)
+    cfg = Config(clinic_url=clinic.url, interval_seconds=3600)
+
+    watch_module.watch(cfg, tmp_path / "state.json", Outbox(), out=lambda _m: None, stop=stop, wake=wake)
+
+    assert len(rounds) == 2

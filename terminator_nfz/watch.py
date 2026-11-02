@@ -2,6 +2,7 @@
 
 import html
 import time
+from functools import partial
 from collections import Counter
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -105,31 +106,47 @@ def load_doctors(session, cfg):
     return clinic, doctors, missing
 
 
-def watch(cfg, state_path, send, minutes=None, once=False, verbose=False):
-    """Pętla sprawdzania. minutes=None oznacza pracę bez końca. Zwraca kod wyjścia procesu."""
+def watch(cfg, state_path, send, minutes=None, once=False, verbose=False, out=None, stop=None, wake=None):
+    """Pętla sprawdzania. minutes=None oznacza pracę bez końca. Zwraca kod wyjścia procesu.
+
+    Dla okienkowej wersji: out zastępuje print, stop (threading.Event) kończy pętlę,
+    a wake przerywa czekanie między rundami („Sprawdź teraz”; przy zatrzymaniu trzeba ustawić oba).
+    """
+    out = out or partial(print, flush=True)
     session = make_session()
     state = State.load(state_path)
 
     def log(msg):
         if verbose or not msg.startswith("  "):
-            print(msg, flush=True)
+            out(msg)
+
+    def stopped():
+        return stop is not None and stop.is_set()
+
+    def pause(seconds, event):
+        if event is None:
+            time.sleep(seconds)
+        else:
+            event.wait(seconds)
+            if event is wake:
+                wake.clear()
 
     try:
         clinic, doctors, missing = load_doctors(session, cfg)
     except ClinicError:
         raise
     except Exception as exc:  # strona placówki chwilowo niedostępna
-        print(f"Nie udało się pobrać strony placówki: {exc}", flush=True)
+        out(f"Nie udało się pobrać strony placówki: {exc}")
         if update_health(state, [f"Strona placówki niedostępna: {exc}"], send):
             state.save(state_path, now_local())
         return 1
 
-    print(f"{clinic.name}: pilnuję {len(doctors)} lekarzy: " + ", ".join(d.name for d in doctors), flush=True)
+    out(f"{clinic.name}: pilnuję {len(doctors)} lekarzy: " + ", ".join(d.name for d in doctors))
     for doc_id in missing:
-        print(f"UWAGA: lekarza o id {doc_id} nie ma na stronie placówki", flush=True)
+        out(f"UWAGA: lekarza o id {doc_id} nie ma na stronie placówki")
 
     def fetch(doctor):
-        time.sleep(config.DELAY_BETWEEN_DOCTORS_S)
+        pause(config.DELAY_BETWEEN_DOCTORS_S, stop)
         return fetch_tile(session, doctor)
 
     deadline = None if minutes is None else time.monotonic() + minutes * 60
@@ -139,17 +156,19 @@ def watch(cfg, state_path, send, minutes=None, once=False, verbose=False):
             try:
                 clinic, doctors, missing = load_doctors(session, cfg)
             except Exception as exc:  # zostajemy przy poprzedniej liście lekarzy
-                print(f"Nie udało się odświeżyć listy lekarzy: {exc}", flush=True)
+                out(f"Nie udało się odświeżyć listy lekarzy: {exc}")
             next_refresh = time.monotonic() + config.CLINIC_REFRESH_MINUTES * 60
         problems = [f"Lekarza o id {i} nie ma na stronie placówki" for i in missing]
         try:
             if run_round(doctors, fetch, state, send, now_local(), cfg.kinds, clinic.name, problems, log):
                 state.save(state_path, now_local())
         except Exception as exc:  # np. Telegram chwilowo niedostępny – spróbujemy w następnej rundzie
-            print(f"Błąd rundy: {exc!r}", flush=True)
-        if once or (deadline is not None and time.monotonic() + cfg.interval_seconds > deadline):
+            out(f"Błąd rundy: {exc!r}")
+        if once or stopped() or (deadline is not None and time.monotonic() + cfg.interval_seconds > deadline):
             break
-        time.sleep(cfg.interval_seconds)
+        pause(cfg.interval_seconds, wake or stop)
+        if stopped():
+            break
 
     if state.saved_at is None or now_local() - state.saved_at > timedelta(days=config.KEEPALIVE_DAYS):
         state.save(state_path, now_local())

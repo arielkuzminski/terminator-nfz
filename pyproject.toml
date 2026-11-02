@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "terminator-nfz"
-version = "1.0.0"
-description = "Powiadomienia na Telegram o wolnych terminach do lekarza z lekarzebezkolejki.pl"
+version = "1.1.0"
+description = "Powiadomienia (Windows, Telegram) o wolnych terminach do lekarza z lekarzebezkolejki.pl"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
@@ -13,13 +13,20 @@ dependencies = [
     "requests>=2.31",
     "beautifulsoup4>=4.12",
     "tomli>=2.0; python_version < '3.11'",
+    # Windows nie ma systemowej bazy stref czasowych (Europe/Warsaw)
+    "tzdata; sys_platform == 'win32'",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+# okienkowa wersja (terminator-nfz-gui): ikona przy zegarku
+gui = ["pystray>=0.19", "Pillow>=10"]
 
 [project.scripts]
 terminator-nfz = "terminator_nfz.cli:main"
+
+[project.gui-scripts]
+terminator-nfz-gui = "terminator_nfz.gui:main"
 
 [tool.setuptools]
 packages = ["terminator_nfz"]
