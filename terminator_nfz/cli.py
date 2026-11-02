@@ -118,6 +118,10 @@ def build_parser():
 
 
 def main(argv=None):
+    # Na Windowsie wyjście przekierowane do pliku/potoku ma stronę kodową bez „✓” i emoji – nie wywracaj się na nich.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
     load_dotenv()
     args = build_parser().parse_args(argv)
     try:

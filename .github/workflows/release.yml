@@ -1,7 +1,8 @@
 name: release
 
-# Buduje TerminatorNFZ.exe. Tag v* dołącza go do GitHub Release,
-# ręczne uruchomienie (workflow_dispatch) zostawia go tylko jako artefakt do pobrania.
+# Buduje gotowe pliki (bez instalowania Pythona): okienkowy TerminatorNFZ.exe oraz terminalowy
+# terminator-nfz dla Linuksa (x64, arm64/Raspberry Pi), macOS i Windows.
+# Tag v* dołącza je do GitHub Release, ręczne uruchomienie zostawia je tylko jako artefakty.
 on:
   push:
     tags: ["v*"]
@@ -11,8 +12,22 @@ permissions:
   contents: write
 
 jobs:
-  exe:
-    runs-on: windows-latest
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux budujemy na starszym Ubuntu: plik działa na systemach z tą samą lub nowszą glibc.
+          - os: ubuntu-22.04
+            file: terminator-nfz-linux-x64
+          - os: ubuntu-22.04-arm
+            file: terminator-nfz-linux-arm64
+          - os: macos-14
+            file: terminator-nfz-macos-arm64
+          - os: windows-latest
+            file: terminator-nfz.exe
+            gui: true
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
@@ -21,22 +36,48 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - run: pip install ".[dev,gui]" pyinstaller
+      - run: pip install ".[dev]" pyinstaller tzdata
+
+      - run: pip install ".[gui]"
+        if: matrix.gui
 
       - run: python -m pytest -q
 
-      - run: python packaging/build_exe.py
+      - name: Build CLI
+        shell: bash
+        run: |
+          python packaging/build_exe.py cli --name "${FILE%.exe}"
+          ./dist/"$FILE" --version
+        env:
+          FILE: ${{ matrix.file }}
+
+      - name: Build GUI
+        if: matrix.gui
+        run: python packaging/build_exe.py gui
 
       - uses: actions/upload-artifact@v4
         with:
-          name: TerminatorNFZ
-          path: dist/TerminatorNFZ.exe
+          name: ${{ matrix.file }}
+          path: |
+            dist/${{ matrix.file }}
+            dist/TerminatorNFZ.exe
+          if-no-files-found: error
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
 
       - name: Release
-        if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ github.token }}
-        shell: bash
+          GH_REPO: ${{ github.repository }}
         run: |
+          ls -la dist
           gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --generate-notes
-          gh release upload "$GITHUB_REF_NAME" dist/TerminatorNFZ.exe --clobber
+          gh release upload "$GITHUB_REF_NAME" dist/* --clobber
