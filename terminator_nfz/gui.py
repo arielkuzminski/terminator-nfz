@@ -88,8 +88,8 @@ class App:
         self.quitting = False
 
         root.title(TITLE)
-        root.geometry("760x600")
-        root.minsize(640, 480)
+        root.geometry("780x700")
+        root.minsize(680, 640)
         self._set_style()
         self._set_window_icon()
 
@@ -267,7 +267,10 @@ class App:
 
         box = ttk.Frame(f)
         box.pack(fill="both", expand=True)
-        self.tree = ttk.Treeview(box, columns=("desc", "status"), show="tree headings", selectmode="none")
+        # Mała wysokość startowa: lista rośnie, gdy jest miejsce, ale nie spycha poniżej okna opcji i przycisku „Zacznij”.
+        self.tree = ttk.Treeview(
+            box, columns=("desc", "status"), show="tree headings", selectmode="none", height=5
+        )
         for col, text, width in (("#0", "Lekarz", 340), ("desc", "Specjalność", 180), ("status", "Najbliższy termin", 170)):
             self.tree.heading(col, text=text, anchor="w")
             self.tree.column(col, width=width, minwidth=60, anchor="w")
@@ -437,6 +440,7 @@ class App:
 
     def _telegram_wait_for_message(self, name):
         self.tg_bot = name
+        self.tg_help.pack_forget()  # instrukcja o BotFatherze już niepotrzebna
         self.tg_status.configure(
             text=f"✓ Bot @{name} znaleziony. Teraz otwórz go na Telegramie, napisz cokolwiek (np. „cześć”) "
                  "i kliknij „Sprawdź”.",
