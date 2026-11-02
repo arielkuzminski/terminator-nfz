@@ -7,9 +7,10 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-# Katalog z config.toml i .env (zmień, jeśli sklonowałeś repo gdzie indziej).
+# Katalog z programem, config.toml i .env (zmień, jeśli trzymasz go gdzie indziej).
 WorkingDirectory=%h/terminator-nfz
-ExecStart=%h/terminator-nfz/.venv/bin/terminator-nfz run
+# Gotowy plik ./terminator-nfz, a jeśli go nie ma – wersja z Pythonem z .venv.
+ExecStart=/bin/sh -c 'if [ -x ./terminator-nfz ]; then exec ./terminator-nfz run; else exec .venv/bin/terminator-nfz run; fi'
 Restart=always
 RestartSec=60
 

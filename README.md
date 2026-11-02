@@ -64,6 +64,34 @@ także przy wyłączonym komputerze.
 
 ## Instalacja
 
+### Najprościej: gotowy plik (bez Pythona)
+
+Jeden plik, w którym jest już wszystko. Wybierz swój system:
+
+| System | Plik |
+|---|---|
+| Linux (serwer, VPS, WSL) | [`terminator-nfz-linux-x64`](https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/terminator-nfz-linux-x64) |
+| Raspberry Pi 4/5 (64-bitowy system) | [`terminator-nfz-linux-arm64`](https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/terminator-nfz-linux-arm64) |
+| macOS (M1 i nowsze) | [`terminator-nfz-macos-arm64`](https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/terminator-nfz-macos-arm64) |
+| Windows (terminal) | [`terminator-nfz.exe`](https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/terminator-nfz.exe) |
+
+Na Linuksie, Raspberry Pi i Macu (podmień nazwę pliku na swoją):
+
+```bash
+mkdir -p ~/terminator-nfz && cd ~/terminator-nfz
+curl -L -o terminator-nfz https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/terminator-nfz-linux-x64
+chmod +x terminator-nfz
+./terminator-nfz setup
+```
+
+Dalej w instrukcji `terminator-nfz` oznacza `./terminator-nfz`, uruchamiany w katalogu `~/terminator-nfz`. Tam
+leżą też `config.toml`, `.env` i `state.json`.
+
+> Nie znalazłeś swojego systemu, np. Raspberry Pi z 32-bitowym systemem albo Mac z procesorem Intel? Albo
+> plik się nie uruchamia na bardzo starym Linuksie? Zainstaluj wersję z Pythonem, opisaną niżej.
+
+### Z Pythonem
+
 Wymagany jest Python 3.10 lub nowszy.
 
 ```bash
@@ -190,8 +218,9 @@ Program działa, dopóki go nie zatrzymasz (Ctrl+C). Opcja `--minutes 120` końc
 
 ```bash
 mkdir -p ~/.config/systemd/user
-cp deploy/terminator-nfz.service ~/.config/systemd/user/
-# jeśli repo nie leży w ~/terminator-nfz, popraw ścieżki w pliku usługi
+curl -L -o ~/.config/systemd/user/terminator-nfz.service   https://raw.githubusercontent.com/arielkuzminski/terminator-nfz/main/deploy/terminator-nfz.service
+# usługa uruchamia ~/terminator-nfz/terminator-nfz (gotowy plik) albo ~/terminator-nfz/.venv (wersja z Pythonem);
+# jeśli trzymasz program gdzie indziej, popraw WorkingDirectory w pliku usługi
 systemctl --user daemon-reload
 systemctl --user enable --now terminator-nfz
 loginctl enable-linger "$USER"        # żeby działało też po wylogowaniu
@@ -204,8 +233,10 @@ uruchom `wsl --shutdown`. WSL działa tylko wtedy, gdy komputer jest włączony.
 ### Na stałe: cron
 
 ```cron
-*/15 * * * * cd ~/terminator-nfz && flock -n /tmp/terminator-nfz.lock .venv/bin/terminator-nfz run --minutes 14 >> logs.txt 2>&1
+*/15 * * * * cd ~/terminator-nfz && flock -n /tmp/terminator-nfz.lock ./terminator-nfz run --minutes 14 >> logs.txt 2>&1
 ```
+
+W wersji z Pythonem zamiast `./terminator-nfz` wpisz `.venv/bin/terminator-nfz`.
 
 ### Na stałe: GitHub Actions (bez własnego komputera)
 
@@ -272,8 +303,10 @@ Opcje `run`: `--config PLIK` (domyślnie `config.toml`), `--state PLIK` (domyśl
 .venv/bin/terminator-nfz-gui          # okienkowa wersja uruchomiona z kodu
 ```
 
-Plik `.exe` buduje się na Windowsie poleceniem `python packaging/build_exe.py` (potrzebny `pip install pyinstaller`)
-albo automatycznie: workflow `release` po wypchnięciu tagu `v*` dołącza go do GitHub Release.
+Gotowe pliki buduje `python packaging/build_exe.py cli` (terminal, na bieżącym systemie) albo
+`python packaging/build_exe.py gui` (okienkowy `.exe`, na Windowsie). Potrzebne są `pip install pyinstaller tzdata`.
+Automatycznie robi to workflow `release`: po wypchnięciu tagu `v*` buduje pliki dla Linuksa, Raspberry Pi, macOS
+i Windows i dołącza je do GitHub Release.
 
 Testy działają na zapisanych prawdziwych odpowiedziach serwisu (`tests/fixtures/`) i nie łączą się z internetem.
 
