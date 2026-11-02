@@ -1,7 +1,7 @@
 # Terminator NFZ
 
-Wiadomość na Telegramie, gdy tylko u wybranego lekarza zwolni się termin. Działa z każdą przychodnią, która
-zapisuje pacjentów przez [lekarzebezkolejki.pl](https://lekarzebezkolejki.pl).
+Powiadomienie (okienko na komputerze albo wiadomość na Telegramie), gdy tylko u wybranego lekarza zwolni się
+termin. Działa z każdą przychodnią, która zapisuje pacjentów przez [lekarzebezkolejki.pl](https://lekarzebezkolejki.pl).
 
 ```
 🩺 Wolny termin – Przychodnia Przykładowa
@@ -15,6 +15,31 @@ Terminarz lekarza
 Wiele przychodni wystawia terminy online tylko na dzień lub dwa do przodu, a wolne miejsca znikają w kilka minut.
 Terminator sprawdza je co półtorej minuty i daje znać, zanim zrobi to ktoś inny. Zapisujesz się sam, jednym
 kliknięciem w link z wiadomości.
+
+## Najprościej: program dla Windows
+
+Bez instalowania czegokolwiek i bez wpisywania poleceń.
+
+1. Pobierz **[TerminatorNFZ.exe](https://github.com/arielkuzminski/terminator-nfz/releases/latest/download/TerminatorNFZ.exe)**
+   i kliknij go dwa razy.
+2. Windows może pokazać ostrzeżenie „System Windows ochronił ten komputer”. Program nie ma płatnego podpisu
+   cyfrowego, stąd ten komunikat. Kliknij **Więcej informacji**, a potem **Uruchom mimo to**.
+3. Otwórz [lekarzebezkolejki.pl](https://lekarzebezkolejki.pl), znajdź swoją przychodnię, skopiuj adres jej strony
+   i wklej go w programie.
+4. Kliknij nazwisko lekarza, którego program ma pilnować, i **Zacznij pilnować**.
+
+Gdy zwolni się termin, wyskoczy okienko z dźwiękiem i przyciskiem **Zarezerwuj ten termin**. Okno programu możesz
+zamknąć, bo pilnowanie trwa dalej, a program czeka przy ikonie obok zegara (prawy dolny róg ekranu). Stamtąd go
+wstrzymasz albo zakończysz. Opcjonalnie:
+
+- **Uruchamiaj razem z Windowsem**: po włączeniu komputera program sam wraca do pilnowania.
+- **Telegram**: powiadomienia przychodzą też na telefon. Program przeprowadzi Cię przez połączenie z botem.
+
+Komputer musi być włączony. Program nie pozwala mu się uśpić, dopóki pilnuje, ale ekran może zgasnąć. Ustawienia
+leżą w `%APPDATA%\TerminatorNFZ`.
+
+Reszta tej instrukcji dotyczy wersji dla zaawansowanych: terminal, serwer albo GitHub Actions, czyli pilnowanie
+także przy wyłączonym komputerze.
 
 ## Spis treści
 
@@ -47,6 +72,8 @@ cd terminator-nfz
 python3 -m venv .venv
 .venv/bin/pip install .
 ```
+
+Na Windowsie zamiast `python3` wpisz `py`, a zamiast `.venv/bin/` wpisz `.venv\Scripts\`.
 
 Dalej w instrukcji `terminator-nfz` oznacza `.venv/bin/terminator-nfz`. Możesz też aktywować środowisko
 poleceniem `source .venv/bin/activate`.
@@ -240,9 +267,13 @@ Opcje `run`: `--config PLIK` (domyślnie `config.toml`), `--state PLIK` (domyśl
 ## Rozwój
 
 ```bash
-.venv/bin/pip install -e ".[dev]"
+.venv/bin/pip install -e ".[dev,gui]"
 .venv/bin/python -m pytest -q
+.venv/bin/terminator-nfz-gui          # okienkowa wersja uruchomiona z kodu
 ```
+
+Plik `.exe` buduje się na Windowsie poleceniem `python packaging/build_exe.py` (potrzebny `pip install pyinstaller`)
+albo automatycznie: workflow `release` po wypchnięciu tagu `v*` dołącza go do GitHub Release.
 
 Testy działają na zapisanych prawdziwych odpowiedziach serwisu (`tests/fixtures/`) i nie łączą się z internetem.
 

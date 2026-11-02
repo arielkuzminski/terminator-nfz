@@ -114,7 +114,7 @@ def _show_doctors(say, session, doctors):
     say("\n" + LEGEND)
 
 
-def _write_config(path, clinic, chosen, visit_types, interval):
+def write_config(path, clinic, chosen, visit_types, interval):
     ids = []
     for doctor in chosen:
         if doctor.id not in ids:
@@ -167,7 +167,7 @@ def _setup_config(ask, say, config_path):
             break
         say(f"  ✗ Podaj liczbę sekund, co najmniej {MIN_INTERVAL_S}.")
 
-    _write_config(config_path, clinic, chosen, visit_types, interval)
+    write_config(config_path, clinic, chosen, visit_types, interval)
     say(f"\n✓ Zapisano {config_path}")
 
 
